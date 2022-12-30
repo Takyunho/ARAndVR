@@ -82,3 +82,7 @@ typings/
 package-lock.json
 
 .settings.json
+.DS_Store
+
+images/*
+qr/*
