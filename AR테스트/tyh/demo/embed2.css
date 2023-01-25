@@ -1,0 +1,195 @@
+body {
+  font-family: "Roboto", sans-serif;
+  text-shadow: 0px 0px 10px #00d2ff;
+  color: #fff;
+  font-size: 40px;
+}
+
+h1 {
+  font-size: 52px;
+}
+
+/* 박스 전체적인 스타일 */
+.dark {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  padding: 40px;
+}
+/* 가운데 메인박스 */
+.main {
+  width: 1920px;
+  height: 1200px;
+  overflow: hidden;
+}
+/* 양옆 박스 */
+.menu {
+  width: 390px;
+  height: 1220px;
+  text-align: center;
+}
+.video-menu {
+  width: 800px;
+}
+/* 옆 박스의 메뉴 스타일 */
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a.button {
+  display: inline-block;
+  width: 100%;
+  border-radius: 20px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+a.button:hover, .play-btn:hover {
+  background-color: #fff;
+  color: #888;
+}
+
+a.button:active, .play-btn:active {
+  background-color: #fff;
+  color: #888;
+  box-shadow: 0px 0px 50px #00d2ff;
+}
+
+a.imgLink {
+  width: 100%;
+  border-radius: 20px;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  background-color: #444;
+  border: 3px solid #444;
+  text-shadow: none;
+  display: block;
+}
+
+a.imgLink:hover {
+  border: 3px solid #fff;
+  background-color: #444;
+}
+
+.code {
+  white-space: pre;
+  font-size: 0.7em;
+  background-color: #000;
+  margin-bottom: 30px;
+}
+
+.next,
+.prev {
+  position: absolute;
+  bottom: 0px;
+  right: 30px;
+  display: inline-block;
+  width: auto !important;
+  padding: 20px 30px !important;
+}
+
+.prev {
+  right: auto;
+  left: 30px;
+}
+
+#page1 {
+  position: relative;
+  height: 100%;
+}
+
+#page2,
+#page3,
+#page4 {
+  display: none;
+  position: relative;
+  height: 100%;
+}
+
+#page5 {
+  position: relative;
+  height: 100%;
+}
+
+.slide {
+    height: 100%;
+}
+
+.slide:target #page1 {
+  display: none;
+}
+
+#slide2:target #page2 {
+  display: block;
+}
+
+#slide3:target #page3 {
+  display: block;
+}
+
+#slide4:target #page4 {
+  display: block;
+}
+
+#slide4:target #page5 {
+  display: block;
+}
+
+#slide4:target #page6 {
+  display: block;
+}
+
+/* #page4 ul {
+  list-style-type: square;
+  font-size: 0.8em;
+} */
+
+
+
+#video, .video-container, #video-border {
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid #fff;
+  display: none;
+}
+
+
+
+.play-btn {
+  width: 160px;
+  height: 80px;
+  border-radius: 5px;
+  border: none;
+  background-color: #444;
+  display: inline-block;
+  border-radius: 20px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 48px;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+}
+
+.video-wrap {
+  display: none;
+  background-color: #00d2ff;
+  /* position: absolute;
+  top: 10px;
+  left: 10px; */
+}

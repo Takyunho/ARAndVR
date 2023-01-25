@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+
+<head>
+  <!--# a-frame -->
+  <!-- <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script> -->
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <!--? 1.3.0에서 htmlembed는 동작하지 않는다?? -->
+  <!-- <script src="../JS/aframe-master-v1.3.0.js"></script> -->
+  <!--# a-frame htmlembed -->
+  <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+  <!--# video.js -->
+  <script src="https://unpkg.com/video.js/dist/video.js"></script>
+  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+  <script src="//cdn.dashjs.org/latest/dash.all.debug.js"></script>
+  <script src="https://unpkg.com/videojs-contrib-dash/dist/videojs-dash.js"></script>
+
+  <link rel="stylesheet" href="embed2.css">
+</head>
+
+<body id="body">
+  <!-- 영상 숨기고 보여주기까지 가능 -->
+  <!--~ 비디오.js 
+  https://videojs.com/guides/setup/#options 
+  https://docs.videojs.com/docs/api/player.html
+  -->
+  <!--~ 비디오js는 source 태그에 src 속성을 넣어야만 동작함 -> video-js 태그에 src를 넣으면 동작하지 않음 -->
+  <!-- <div class="video-container">
+    <video-js id="ex-video" muted width=480 height=270 class="vjs-default-skin" controls playback>
+      <source src="https://s3.amazonaws.com/_bc_dml/example-content/sintel_dash/sintel_vod.mpd"
+        type="application/dash+xml">
+    </video-js>
+  </div> -->
+
+  <!-- <div class="video-container">
+    <video-js id="ex-video" muted width=480 height=270 class="vjs-default-skin" controls>
+      <source src="./video/sintel.mp4">
+    </video-js>
+  </div> -->
+
+  <div class="video-container">
+    <video class="video-js" id="ex-video" muted width=480 height=270 class="vjs-default-skin" controls>
+      <!-- <source src="https://s3.amazonaws.com/_bc_dml/example-content/sintel_dash/sintel_vod.mpd" type="application/dash+xml"> -->
+      <source src="./video/sintel.mp4">
+    </video>
+  </div>
+
+
+  <div id="slide2" class="slide">
+    <div id="slide3" class="slide">
+      <div id="slide4" class="slide">
+        <div id="slide5" class="slide">
+          <!--? scene 밖에서는 동영상이 원활하게 재생되는 반면, scene 안에서는 video가 정상적으로 동작하지 않는다?? -->
+
+          <a-scene fog="type: linear; color: #222; far: 20;">
+            <a-assets timeout="1000">
+              <img id="floor" src="./assets/floor.png">
+              <!-- <video id="video" loop="true" src="./video/sintel.mp4" autoplay></video> -->
+            </a-assets>
+
+            <!--@ 배경 -->
+            <a-sky color="#222222"></a-sky>
+
+            <!--^ 카메라 및 레이캐스터 -->
+            <a-entity id="cameraRig">
+              <a-camera id="camera"></a-camera>
+              <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen"></a-entity>
+              <a-entity laser-controls raycaster="objects: .screen;"></a-entity>
+            </a-entity>
+
+            <!--^ 첫번째 스크린 (메뉴가 달려있는 스크린) -->
+            <a-entity id="menu" class="screen menu dark" htmlembed="ppu:256" position="-4.712 1.6 -4.476"
+              rotation="0 45 0">
+              <h2>Menu</h2>
+              <ul>
+                <li><a href="#" class="button" id="homeBtn">Home</a></li>
+                <li><a href="#slide2" class="button" id="cssBtn">CSS</a></li>
+                <!-- <li><a href="#slide3" class="button">Interactivity</a></li> -->
+                <!-- <li><a href="#slide4" class="button">4번째 버튼</a></li> -->
+                <!-- <li><a href="#slide5" class="button">5번째 버튼</a></li> -->
+                <!-- <li><a href="#slide6" class="button">6번째 버튼</a></li> -->
+              </ul>
+            </a-entity>
+
+
+
+            <!--^ 메인스크린 -->
+            <a-entity id="main" class="screen dark main" htmlembed="ppu:256" position="0 1.6 -5">
+              <!--@ 1번 페이지  -->
+              <div id="page1">
+                <h1>Video</h1>
+                <!-- <a-video src="#ex-video_html5_api" position="3 3 -5" rotation="0 0 0" width="4.8" height="2.7"></a-video> -->
+                <button class="play-btn" id="playBtn">play</button>
+                <a href="#slide2" class="button next" id="cssBtn">Next Page</a>
+              </div>
+
+              <!--@ 2번 페이지 -->
+              <div id="page2">
+                <h1>Cascading Style Sheets (CSS)</h1>
+                <a href="#" class="button prev" id="homeBtn">Prev Page</a>
+                <a href="#slide3" class="button next">Next Page</a>
+              </div>
+
+              <!--! main 박스에 넣기 -->
+              <!--! position z값 0으로 하면 화면 깨짐 -->
+              <!--! a-frame 태그를 숨기기 위해서는 visible 속성을 이용 -->
+              <a-video id="a-video" src="#ex-video_html5_api" position="0 0 0.001" rotation="0 0 0" width="7.5"
+                height="3.7"></a-video>
+            </a-entity>
+
+
+            <!--! 화면(Scene, 장면) 위에 띄우기 -->
+            <!-- <a-video src="#ex-video_html5_api" position="3 3 -5" rotation="0 0 0" width="4.8" height="2.7"></a-video> -->
+            <a-box material="src:#tex1" scale="0.5 0.5 0.5" position="0 0.5 -4" id="box" visible="false"></a-box>
+          </a-scene>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    var player = videojs('ex-video', {});
+    console.log(player)
+
+    const homeBtn = document.querySelectorAll('#homeBtn');
+    const cssBtn = document.querySelectorAll('#cssBtn');
+
+    const ex_video = document.querySelector(".video-js");   // video
+    const a_video = document.querySelector("#a-video");   // a-video
+    console.log(ex_video);
+    // console.log(a_video)
+
+    // css버튼 클릭했을때 영상 안보이게
+    for (let i = 0; i < cssBtn.length; i++) {
+      cssBtn[i].addEventListener('click', function () {
+        console.log('click');
+        a_video.setAttribute("visible", false);
+        // 영상 안보이게 하면서 멈추기
+        player.pause();
+        // 텍스트 초기화
+        playBtn.innerText = "play"
+      })
+    }
+
+    // home버튼 클릭했을때 영상 보이기
+    for (let i = 0; i < homeBtn.length; i++) {
+      homeBtn[i].addEventListener('click', function () {
+        console.log('click');
+        a_video.setAttribute("visible", true);
+      })
+    }
+
+    
+    const playBtn = document.querySelector("#playBtn");
+
+    playBtn.addEventListener('click', function () {
+      console.log("ex_video", ex_video)
+      //! video 요소를 가져오는게 아니라 Player에다가 이벤트를 걸어야 되네 
+      let isPaused = player.paused();
+      // let isPlaying = !player.paused();
+
+      if(isPaused) {
+        // 멈춰있다면 재생하기
+        player.play();
+        playBtn.innerText = "pause"
+      } else {
+        // 재생중이면 멈추기 
+        player.pause();
+        playBtn.innerText = "play"
+      }
+    });
+
+
+
+
+
+
+
+
+
+
+  </script>
+  <script>
+      // AFRAME.registerComponent('showbutton', {
+      //   schema: {
+      //     'target': { type: 'selector' },
+      //   },
+      //   init: function () {
+      //     var show = false;
+      //     this.el.addEventListener("click", () => {
+      //       if (show) {
+      //         this.data.target.setAttribute("visible", "false");
+      //         this.el.querySelector("a").innerHTML = "Show Box";
+      //       } else {
+      //         this.data.target.setAttribute("visible", "true");
+      //         this.el.querySelector("a").innerHTML = "Hide Box";
+      //       }
+      //       show = !show;
+      //     });
+      //   }
+      // });
+
+
+
+
+  </script>
+</body>
+
+
+</html>
+
+<!-- 문제점
+  !1. htmlembed의 html 태그 내에서 a-frame관련된 것들은 적용이 안됨
+  !a-video, a-plane 등등
+  !심지어 video 태그 조차 재생을 시킬 수 없음
+  
+  !2. htmlembed는 a-frame의 높은 버전에서 아직 지원을 하지 않는 것으로 보임
+-->
+
+<!-- 해결방법 -->
+<!-- # 최상위에 돔 올리고 그걸 숨기기 -->
+<!-- # 영상 메인박스 제일 아래에 넣기 -->
+<!-- # 최상위 요소에 이벤트 걸어서 제어 -->

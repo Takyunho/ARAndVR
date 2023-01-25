@@ -1,0 +1,202 @@
+body {
+  font-family: "Roboto", sans-serif;
+  text-shadow: 0px 0px 10px #00d2ff;
+  color: #fff;
+  font-size: 40px;
+}
+.material-icons {
+  font-size: 40px;
+}
+h1 {
+  font-size: 52px;
+}
+
+/*! 버튼 공용 스타일 */
+a.btn, .btn {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 48px;
+  margin-top: 20px;
+}
+
+/** 다음, 이전버튼 */
+.next, .prev {
+  position: absolute;
+  bottom: 0px;
+  right: 30px;
+  width: auto !important;
+  padding: 20px 30px !important;
+}
+.prev {
+  right: auto;
+  left: 30px;
+}
+/** 재생, 멈추기 버튼 */
+.play-pause-btn, .muted-btn {
+  position: absolute;
+  bottom: 0;
+  left: 800px;
+  width: auto !important;
+  padding: 20px 30px !important;
+}
+
+.muted-btn {
+  left: 920px;
+}
+
+.btn:hover, a.btn:hover, .play-pause-btn:hover {
+  background-color: #fff;
+  color: #888;
+}
+.btn:active, a.btn:active, .play-pause-btn:active {
+  background-color: #fff;
+  color: #888;
+  box-shadow: 0px 0px 50px #00d2ff;
+}
+.play-pause-btn:hover {
+  color: #333;
+}
+.play-pause-btn:active {
+  color: #000;
+}
+
+/*! 박스 전체적인 스타일 */
+.dark {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  padding: 40px;
+}
+/* 가운데 메인박스 */
+.main {
+  width: 1920px;
+  height: 1200px;
+  overflow: hidden;
+}
+/* 양옆 박스 */
+.menu {
+  width: 390px;
+  height: 1220px;
+  text-align: center;
+}
+.video-menu {
+  width: 800px;
+}
+/* 옆 박스의 메뉴 스타일 */
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+a.imgLink {
+  width: 100%;
+  border-radius: 20px;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  background-color: #444;
+  border: 3px solid #444;
+  text-shadow: none;
+  display: block;
+}
+
+a.imgLink:hover {
+  border: 3px solid #fff;
+  background-color: #444;
+}
+
+
+
+
+#page1 {
+  position: relative;
+  height: 100%;
+}
+
+#page2,
+#page3,
+#page4,
+#page5 {
+  display: none;
+  position: relative;
+  height: 100%;
+}
+
+.slide {
+    height: 100%;
+}
+
+
+#video, .video-container, #video-border {
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid #fff;
+  display: none;
+}
+
+.video-wrap {
+  display: none;
+  background-color: #00d2ff;
+}
+
+
+.show {
+  display: block;
+}
+.none {
+  display: none;
+}
+
+
+/* model-file-content */
+.model-file-content {
+  width: auto !important;
+  width: 490px;
+  /* padding: 20px 30px !important; */
+}
+.model-file-content thead {
+  font-size: 54px;
+}
+.model-file-content tbody {
+  font-size: 36px;
+}
+
+.file-list {
+  width: auto !important;
+  padding: 20px 30px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.thead {
+  margin-bottom: 10px;
+}
+.thead th {
+  /* border-bottom: 5px solid #fff; */
+  padding-bottom: 15px;
+}
+.tbody {
+
+}
+.tbody td {
+  display: block;
+  text-align: left;
+}
+.tbody td:first-child {
+  margin-top: 20px;
+}
