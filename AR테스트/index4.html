@@ -1,0 +1,48 @@
+<head>
+  <title>Demo a-cursor with no click</title>
+  <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+  <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/
+				dist/aframe-bmfont-text-component.min.js"></script>
+
+</head>
+
+<body>
+  <a-scene>
+    <a-assets>
+    </a-assets>
+
+    <a-box color="blue" width="1" height="1" position="0 10 0" rotation="0 0 0" scale="1 2.5 1">
+    </a-box>
+
+    <a-entity scale="2 2 2" bmfont-text="text: HELLO WORLD!; color:white; size: 1.5; height:
+				0.5; opacity:0" position="-0.27 9.28 0.91"></a-entity>
+
+    <a-camera position="0 7 5">
+      <a-cursor color="#FF0000" />
+    </a-camera>
+
+  </a-scene>
+
+  <script type="text/javascript">
+    var box = document.querySelector('a-box');
+    var text = document.querySelector('a-entity');
+
+    box.addEventListener("mouseenter", function () {
+      text.setAttribute("bmfont-text",
+        {
+          opacity: 1
+        });
+    });
+
+    box.addEventListener("mouseleave", function () {
+      text.setAttribute("bmfont-text",
+        {
+          opacity: 0
+        });
+    });
+
+  </script>
+
+</body>
+
+</html>
