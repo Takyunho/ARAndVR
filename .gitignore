@@ -86,3 +86,5 @@ package-lock.json
 
 images/*
 qr/*
+AR테스트/.vscode/settings.json
+Reference/.vscode/settings.json
