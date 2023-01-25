@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
+	<!-- 파이어베이스.js  -->
+	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+</head>
+
+<body>
+	<header>
+		<nav id="nav" class="nav">
+			<img src="./Logo_IDB1 WH.png" width="100px" height="50px"></img>
+		</nav>
+	</header>
+	<p> from : <input type="text" id="from" /></p>
+	<p> to : <input type="text" id="to" /></p>
+	<p> message : <input type="text" id="message" /></p>
+
+	<button onclick="send_msg()">메시지 전송</button>
+	<p> received message : <input type="text" id="recv" /></p>
+
+
+	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+		let user = urlParams.get("user");
+		let from = document.getElementById('from');
+		let to = document.getElementById('to');
+		from.value = user	// 초기값 설정
+	</script>
+	<script>
+		function send_msg() {
+			fetch("https://ar.idb.ai:50000/send_noti", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					from: document.getElementById("from").value,
+					to: document.getElementById("to").value,
+					message: document.getElementById("message").value,
+				}),
+			})
+				.then((response) => {
+					return response.json();
+				})
+				.then((json) => {
+					console.log(json);
+				});
+		}
+	</script>
+	<script>
+		// Initialize Firebase
+		firebase.initializeApp({
+			apiKey: "AIzASyAzwQJFCn2oYC1mLpzCEzVK775wV1RHNRK",	// 만든키
+			authDomain: "test-6ab08.firebaseapp.com",	// 만든 도메인
+			projectId: "test-6ab08",	// 아이디
+			storageBucket: "test-6ab08.appspot.com",	// 만든버킷저장소
+			messagingSenderId: "343867546285",	// 아이디1
+			appId: "1:243867546285:web:9c4b6ee033f0b6d9bdc424",	 // 아이디2
+		});
+		const messaging = firebase.messaging();
+		//token값 알아내기
+		messaging.requestPermission()		// 등록 토큰에 엑세스
+			.then(function () {
+				console.log("Have permission");
+				return messaging.getToken();
+			})
+			.then(function (token) {
+				console.log("토큰입니다", token);
+				fetch("https://ar.idb.ai:50000/save_token", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						user: user,
+						user_token: token,
+					}),
+				})
+					.then((response) => {
+						return response.json();
+					})
+					.then((json) => {
+						console.log(json);
+					});
+			})
+			.catch(function (err) {
+				console.log(err)
+				console.log("Error Occured");
+			});
+
+		// 메시지 받을 때 실행됨
+		messaging.onMessage(function (payload) {
+			console.log("received payload", payload)
+			console.log("Message received. ", JSON.stringify(payload));
+			//notificationElement.innerHTML = notificationElement.innerHTML + " " + payload.data.notification;
+			//notificationElement.innerHTML = notificationElement.innerHTML + " " + payload.notification.title;
+
+			console.log("쿼리스트링", user)
+			console.log("from의 값", from.value)
+			console.log("to의 값", to.value)
+
+			// TODO 보내는 사람과 받는 사람을 구분해야 한다.
+			// => 이미 구분된다. 기기가 다르면 보내는 사람과 받는 사람이 달라짐!!!
+			// TODO 레이아웃 구성 필요
+			// => 예전에 했던 모달창 형식대로 만들어 보기
+			document.getElementById("recv").value = payload.notification.body;
+		});
+	</script>
+
+</body>
+
+</html>
