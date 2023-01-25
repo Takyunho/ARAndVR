@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
+	<!-- 파이어베이스.js  -->
+	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+</head>
+
+<body>
+	<h1 id="order"></h1>
+	<h1>파이어 메세지</h1>
+	from : <input type="text" id="from" />&nbsp;&nbsp; to :
+	<input type="text" id="to" />&nbsp;&nbsp; message :
+	<input type="text" id="message" />&nbsp;&nbsp;
+	<button onclick="send_msg()">메시지 전송</button>
+	<p>
+		received message : <input type="text" id="recv" />
+
+		<script>
+			const urlParams = new URLSearchParams(window.location.search);
+			let user = urlParams.get("user");
+			document.getElementById('from').value = user
+		</script>
+		<script>
+			function send_msg() {
+				fetch("https://ar.idb.ai:50000/send_noti", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						from: document.getElementById("from").value,
+						to: document.getElementById("to").value,
+						message: document.getElementById("message").value,
+					}),
+				})
+					.then((response) => {
+						return response.json();
+					})
+					.then((json) => {
+						console.log(json);
+					});
+			}
+		</script>
+		<script>
+			// Initialize Firebase
+			firebase.initializeApp({
+				apiKey: "AIzASyAzwQJFCn2oYC1mLpzCEzVK775wV1RHNRK",
+				authDomain: "test-6ab08.firebaseapp.com",
+				projectId: "test-6ab08",
+				storageBucket: "test-6ab08.appspot.com",
+				messagingSenderId: "343867546285",
+				appId: "1:243867546285:web:9c4b6ee033f0b6d9bdc424",
+			});
+			const messaging = firebase.messaging();
+			//token값 알아내기
+			messaging
+				.requestPermission()
+				.then(function () {
+					console.log("Have permission");
+					return messaging.getToken();
+				})
+				.then(function (token) {
+					console.log(token);
+					fetch("https://ar.idb.ai:50000/save_token", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							user: user,
+							user_token: token,
+						}),
+					})
+						.then((response) => {
+							return response.json();
+						})
+						.then((json) => {
+							console.log(json);
+						});
+				})
+				.catch(function (arr) {
+					console.log("Error Occured");
+				});
+
+			messaging.onMessage(function (payload) {
+				console.log("received payload", payload)
+				console.log("Message received. ", JSON.stringify(payload));
+				//notificationElement.innerHTML = notificationElement.innerHTML + " " + payload.data.notification;
+				//notificationElement.innerHTML = notificationElement.innerHTML + " " + payload.notification.title;
+				document.getElementById("recv").value = payload.notification.body;
+			});
+		</script>
+	</p>
+</body>
+
+</html>
