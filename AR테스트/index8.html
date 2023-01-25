@@ -1,0 +1,528 @@
+<!--^ CES -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script> -->
+    <!-- 0.9.2 버전에서 클릭이벤트가 동작 -->
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/3.3.3/aframe/build/aframe-ar.js"></script>
+    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+
+    <!-- plotly -->
+    <script src='https://cdn.plot.ly/plotly-2.16.1.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+
+    <!--# moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <title>AR</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .screen {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 50px;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            padding: 40px;
+        }
+
+        .tabScreen {
+            width: 768px;
+            height: 600px;
+            text-align: center;
+        }
+
+        .mainScreen {
+            width: 1024px;
+            height: 768px;
+            overflow: hidden;
+        }
+
+        ul.list {
+            z-index: 2;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px solid #5B616C;
+            font-weight: bold;
+            font-family: 'NanumSquareB Regular';
+            font-size: 26px;
+            z-index: 10;
+        }
+
+        ul.list::after {
+            content: '';
+            display: block;
+            clear: both;
+            /* tab-button선택자에서 float: left사용한거 clear */
+        }
+
+        .tab-button {
+            display: block;
+            padding: 4px 20px 4px 20px;
+            float: left;
+            margin-right: -1px;
+            margin-bottom: -1px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: .4s;
+        }
+
+        .click-color {
+            border-top: 3px solid #5B616C;
+            border-right: 3px solid #5B616C;
+            border-bottom: 3px solid rgb(175, 187, 234);
+            border-left: 3px solid #5B616C;
+            color: rgb(175, 187, 234);
+            /* margin-top: -2px; */
+            border-radius: 10px 10px 0 0;
+
+        }
+
+        .tab-content {
+            /* display: none; */
+            padding: 10px;
+        }
+
+        .tab-button:hover {
+            color: rgb(175, 187, 234);
+        }
+
+
+
+        .modebar {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .none {
+            display: none;
+        }
+
+        #page1 {
+            display: none;
+            /* position: relative; */
+            height: 100%;
+        }
+
+        #page2 {
+            display: none;
+            /* position: relative; */
+            height: 100%;
+        }
+
+        #tab0:target #page1 {
+            display: block;
+        }
+
+        #tab1:target #page2 {
+            display: block;
+        }
+        
+
+        /* #slide2:target #page2 {
+            display: block;
+        }
+
+        #slide3:target #page3 {
+            display: block;
+        }
+
+        #slide4:target #page4 {
+            display: block;
+        }  */
+
+    </style>
+    <script defer>
+        AFRAME.registerComponent('clickhandler', {
+            init: function () {
+                this.el.addEventListener('click', (e) => {
+                    alert('Clicked!')
+                    console.log(e)
+                    const tabContent = document.querySelectorAll('.tab-content');
+                    console.log(tabContent)
+
+
+                    function openTab(index) {
+                        tabContent[index].classList.add('show');
+                        tabContent[index].classList.remove('none');
+                    }
+                    function closeTab(i) {
+                        tabContent[i].classList.remove('show');
+                        tabContent[i].classList.add('none');
+                    }
+
+
+                    if (e.target.id == "tab0") {
+                        closeTab(1);
+                        // closeTab(2);
+                        openTab(0);
+                    }
+                    if (e.target.id == "tab1") {
+                        closeTab(0);
+                        // closeTab(2);
+                        openTab(1);
+                    }
+                    // if (e.target.id == "tab2") {
+                    //     closeTab(0);
+                    //     closeTab(1);
+                    //     openTab(2);
+                    // }
+                });
+            }
+        });
+
+
+    </script>
+</head>
+
+<body>
+    <!-- 장면 -->
+    <a-scene cursor='rayOrigin: mouse; ' raycaster="objects: #tab0, #tab1" vr-mode-ui="enabled: false"
+        embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+
+        <a-marker preset="hiro">
+            <!-- @ 탭버튼 화면 -->
+            <a-entity class="screen tabScreen" htmlembed="ppu:256" position="-1 0 -2" rotation="-90 0 0">
+                <!-- @TODO -->
+                <!-- 링크태그로 #이용해서 이동할 수 있도록 구현?  -->
+                <!-- 엔티티에다가 클릭이벤트줘서 어떻게 구현할 수 있을까? 고민 -->
+                <ul class="list">
+                    <li id="tab0" class="tab-button click-color"><a href="#page1">탭 1</a></li>
+                    <li id="tab1" class="tab-button"><a href="#page2">탭 2</a></li>
+                </ul>
+
+            </a-entity>
+
+            <!-- @ 탭버튼 클릭시 보여줄 화면 -->
+            <a-entity id="main" class="screen mainScreen" htmlembed="ppu:256" position="0 2.5 -5">
+                <div id="page1">
+                    <div id='myDiv1' class="tab-content show"></div>
+                </div>
+                <div id="page2">
+                    <div id='myDiv2' class="tab-content none"></div>
+                </div>
+            </a-entity>
+
+        </a-marker>
+
+        <!-- <a-camera></a-camera> -->
+    </a-scene>
+
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+</body>
+
+<script>
+    // 탭 1
+    d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/Mining-BTC-180.csv", function (err, rows) {
+
+        function unpack(rows, key) {
+            return rows.map(function (row) { return row[key]; });
+        }
+
+        var headerNames = d3.keys(rows[0]);
+
+        var headerValues = [];
+        var cellValues = [];
+        for (i = 0; i < headerNames.length; i++) {
+            headerValue = [headerNames[i]];
+            headerValues[i] = headerValue;
+            cellValue = unpack(rows, headerNames[i]);
+            cellValues[i] = cellValue;
+        }
+
+        // clean date
+        for (i = 0; i < cellValues[1].length; i++) {
+            var dateValue = cellValues[1][i].split(' ')[0]
+            cellValues[1][i] = dateValue
+        }
+
+        var data = [{
+            type: 'table',
+            columnwidth: [150, 600, 1000, 900, 600, 500, 1000, 1000, 1000],
+            columnorder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            header: {
+                values: headerValues,
+                align: "center",
+                line: { width: 1, color: 'rgb(50, 50, 50)' },
+                fill: { color: ['rgb(235, 100, 230)'] },
+                font: { family: "Arial", size: 8, color: "white" }
+            },
+            cells: {
+                values: cellValues,
+                align: ["center", "center"],
+                line: { color: "black", width: 1 },
+                fill: { color: ['rgba(228, 222, 249, 0.65)', 'rgb(235, 193, 238)', 'rgba(228, 222, 249, 0.65)'] },
+                font: { family: "Arial", size: 9, color: ["black"] }
+            }
+        }]
+
+        var layout = {
+            title: "Bitcoin mining stats for 180 days"
+        }
+
+        Plotly.newPlot('myDiv1', data, layout);
+    });
+
+
+    getDataAndDrawChart();
+    // 탭 2
+    function getDataAndDrawChart() {
+        // const url = `http://14.52.100.115:5000/rest/regression/predict?work_line=${workLine}&sensor=${sensor}`;
+        // ex. work_line : MA05 / sensor : homo_rpm
+
+        // https
+        const url = `https://t2v.kr:50010/genicos`;
+
+        const getData = async () => {
+            const response = await fetch(url);
+            const resJSON = await response.json();
+            return resJSON;
+        };
+
+        getData().then((result) => {
+            console.log("result : ", result);
+            result.reverse(); // 시간값이 반대로 나와서 차트 그릴때 x축을 위해 reverse() 함수를 이용하여 배열 뒤집기
+
+            // 데이터 가공
+            let nowDate = [];
+            let nowResult = [];
+            let predictHigh = [];
+            let predictLow = [];
+            let sensor = [];
+            let workLine = [];
+
+            result.forEach((item, index) => {
+                nowDate[index] = item.now_date;
+                nowResult[index] = item.now_result;
+                predictHigh[index] = item.predict_high;
+                predictLow[index] = item.predict_low;
+                sensor[index] = item.sensor;
+                workLine[index] = item.work_line;
+            });
+
+            // 차트 그리기 함수
+            drawChart(nowDate, nowResult, predictHigh, predictLow, sensor);
+        });
+
+        // 차트 그리기함수
+        function drawChart(
+            nowDate,
+            nowResult,
+            predictHigh,
+            predictLow,
+            sensor
+        ) {
+            let data = [];
+            const START = moment(nowDate, "YYYY-MM-DD").format("YYYY-MM-DD 08:00:00");
+            const END = moment(nowDate, "YYYY-MM-DD").format("YYYY-MM-DD 21:00:00");
+
+            // predictHigh(상한값)
+            const trace1 = {
+                x: nowDate,
+                y: predictHigh,
+                type: "scatter",
+                mode: "lines+markers",
+                name: "predict_High",
+                line: { width: 2, color: "red" },
+                marker: { color: "red", size: 2 },
+                // fill: "tonexty",
+                // fillcolor: "rgba(211, 211, 211, 0.5)",
+                // fillcolor: "rgba(68, 68, 68, 0.1)",
+            };
+
+            // predictLow(하한값)
+            const trace2 = {
+                x: nowDate,
+                y: predictLow,
+                type: "scatter",
+                mode: "lines+markers",
+                name: "Predict_Low",
+                line: { width: 2 },
+                marker: { color: "red", size: 2 },
+                fill: "tonexty",
+                // fillcolor: 'rgba(0,0,0,0)'
+                fillcolor: "rgba(211, 211, 211, 0.5)",
+            };
+
+            // nowResult(현재값)
+            const trace3 = {
+                x: nowDate,
+                y: nowResult,
+                type: "scatter",
+                mode: "lines+markers",
+                name: "Now_Value",
+                line: { color: "#2196f3", width: 2 },
+                marker: { color: "#2196f3", size: 2 },
+                // fill: "tonexty",
+                // fillcolor: "rgba(24,29,41)"
+            };
+
+            data.push(trace1, trace2, trace3);
+
+            // 레이아웃
+            const layout = {
+                title: false, // 차트의 제목
+                width: 390, // 차트의 너비
+                height: 145, // 차트의 높이
+                xaxis: {
+                    range: [START, END],
+                    zeroline: false,
+                    ticks: "inside", // 글씨를 안쪽으로 할지 바깥쪽으로 할지
+                    gridcolor: "rgba(125, 127, 132, 0.9)", // x축의 grid 색상을 변경할 수 있다.
+                    // tickcolor: 'rgba(0,0,0,0)',
+                    nticks: 6,
+                },
+                yaxis: {
+                    zeroline: false,
+                    ticks: "outside",
+                    gridcolor: "rgba(125, 127, 132, 0.9)",
+                    nticks: 5,
+                },
+
+                margin: { t: 30, b: 55, l: 55, r: 20, pad: 10 },
+                showlegend: false,
+                paper_bgcolor: "rgba(10,10,0,0.5)",
+                plot_bgcolor: "rgba(10,0,0,0.5)",
+                autosize: true,
+                font: {
+                    // family: 'Noto Sans KR',
+                    size: 12,
+                    color: "#fff",
+                    weight: 200,
+                },
+            };
+
+            Plotly.newPlot('myDiv2', data, layout, { displayModeBar: false });
+        }
+    }
+
+
+    // 탭 3
+    function DrawThresholdChart() {
+        var message;
+        var curDate = new Date();
+        var bfDate = curDate.setHours(curDate.getHours() - 1);
+        curDate = moment(curDate).format("YYYY-MM-DD HH:mm:ss");
+        bfDate = moment(bfDate).format("YYYY-MM-DD HH:mm:ss");
+        const SENSOR = "co2";
+
+        let x1 = [];
+        let y1 = [];
+        let _color;
+        let defaultColor;
+        let upperLimit = 10;
+
+        // https
+        let cmd = "https://t2v.kr:50010/go_idb_ai"
+
+        setDefaultColor();
+        drawChart();
+        function drawChart() {
+            upperLimit = setUpperLimit(SENSOR); // co2 = 10
+
+            fetch(cmd)
+                .then((response) => response.json())
+                .then((parsedResponse) => {
+                    console.log(parsedResponse);
+                    if (parsedResponse.results[0].series[0] != undefined) {
+
+                        parsedResponse.results[0].series[0].values.forEach(function (item, index) {
+                            var date = new Date(item[0]);
+                            var local_date = moment.utc(date).local().format("YYYY-MM-DD HH:mm:ss");
+                            x1[index] = local_date;
+                            y1[index] = item[1];
+                        });
+
+                        const firstTrace = {
+                            type: "scatter",
+                            mode: "lines",
+                            name: "Stat",
+                            x: x1,
+                            y: y1,
+                            line: { color: defaultColor },
+                        };
+
+                        const upperLimitLine = {
+                            type: "scatter",
+                            mode: "lines",
+                            name: "Upper_Limit",
+                            x: x1,
+                            y: Array.from({ length: 100 }, () => upperLimit),
+                            line: { color: "red" },
+                        };
+
+                        const data = [firstTrace, upperLimitLine];
+
+                        const layout = {
+                            title: false,
+                            width: 700,
+                            height: 300,
+                            margin: { t: 15, b: 50, l: 30, r: 20, pad: 0 },
+                            showlegend: false,
+                            // paper_bgcolor: "#f0f0f0",
+                            // plot_bgcolor: "#f0f0f0",
+                            paper_bgcolor: "rgba(0,0,0,0)",
+                            plot_bgcolor: "rgba(0,0,0,0)",
+                            font: {
+                                //family: 'Jeju Gothic, truetype',
+                                // family: "Nanum Barun Gothic, sans-serif",
+                                size: 16,
+                                // color: "#666666",
+                                color: "#fff",
+                                weight: 700,
+                            },
+                        };
+                        return Plotly.newPlot("myDiv3", data, layout);
+                    } else {
+                        console.log("No Data");
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+        setInterval(drawChart, 20000);
+
+
+        function setUpperLimit() {
+            switch (SENSOR) {
+                case "co2":
+                    return 10;
+                default:
+                    break;
+            }
+        }
+
+        function setDefaultColor() {
+            switch (SENSOR) {
+                case "co2":
+                    defaultColor = "#0070C0";
+                    return;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+
+
+</script>
+
+
+
+
+</html>
