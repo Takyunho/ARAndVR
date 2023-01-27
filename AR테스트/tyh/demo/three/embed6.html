@@ -1,4 +1,4 @@
-<!--! three.js 넣기 -->
+<!--! 3d model 넣기 및 동적으로 생성한 html에 비디오 넣기 -->
 <!doctype html>
 <html>
 
@@ -42,13 +42,14 @@
 
 <body id="body">
 
-  <!-- video.js -->
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ video.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- ~ video 1 -->
   <div class="video-container">
     <video class="video-js" id="ex-video" width=480 height=270 class="vjs-default-skin" controls>
       <source src="https://ar.idb.ai:8443/rtsp/cam1/index.m3u8">
     </video>
   </div>
-
+  <!-- ~ video 2 -->
   <div class="video-container">
     <video class="video-js" id="ex-video2" width=480 height=270 class="vjs-default-skin" controls>
       <!-- <source src="./video/sintel.mp4"> -->
@@ -57,34 +58,48 @@
       <source src="../video/KakaoTalk_Video_2023-01-25-09-51-57.mp4">
     </video>
   </div>
+  <!-- ~ video 3 -->
+  <div class="video-container2">
+    <video class="video-js videoJS" id="sub-video-0" width=480 height=270 class="vjs-default-skin" controls>
+      <!-- <source src="https://ar.idb.ai:8443/rtsp/cam1/index.m3u8"> -->
+      <!-- <source src="../video/KakaoTalk_Video_2023-01-25-09-51-57.mp4"> -->
+      <source src="../video/sintel.mp4">
+    </video>
+  </div>
+  <!-- ~ video 4 -->
+  <div class="video-container3">
+    <video class="video-js videoJS" id="sub-video-1" width=480 height=270 class="vjs-default-skin" controls>
+      <source src="../video/KakaoTalk_Video_2023-01-25-09-51-57.mp4">
+      <!-- <source src="../video/sintel.mp4"> -->
+    </video>
+  </div>
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ video.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
   <!-- 장면에다가 fog="type: linear; color: #222; 를 주면 배경이 가려짐 -->
   <a-scene  far: 20;">
+    <!--@ assets -->
     <a-assets timeout="1000">
       <img id="floor" src="../assets/floor.png">
       <img id="sky" src="../images/stars.jpg" crossorigin="anonymous" />
       <!-- <video id="video" loop="true" src="./video/sintel.mp4" autoplay></video> -->
       <a-asset-item id="3dModel" src="machine_011_light.gltf"></a-asset-item>
     </a-assets>
-
     <!--@ 배경 -->
     <a-plane material="src:#floor; repeat: 700 700; transparent: true;" height="800" width="800" rotation="-90 0 0"
       position="0 -2 0"></a-plane>
     <a-sky src="#sky"></a-sky>
-
     <!--@ 카메라 및 레이캐스터 -->
     <a-entity id="cameraRig">
       <!-- <a-camera id="camera"></a-camera> -->
       <!-- wasd 컨트롤 -->
       <a-entity camera look-controls wasd-controls="acceleration: 400" position="0 1.6 0"></a-entity>
       <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen"></a-entity>
-      <a-entity laser-controls raycaster="objects: .screen;"></a-entity>ㄴㄴㄴ
+      <a-entity laser-controls raycaster="objects: .screen;"></a-entity>
     </a-entity>
 
 
-
     <!--^ 첫번째 스크린 (메뉴가 달려있는 스크린) -->
-    <a-entity id="menu" class="screen menu dark" htmlembed="ppu:256" position="-4.712 1.6 -4.476" rotation="0 45 0">
+    <a-entity id="menu" class="screen menu dark" htmlembed="ppu:256" position="-4.712 1.6 -4.406" rotation="0 45 0">
       <h2>Menu</h2>
       <ul>
         <li><a class="btn" id="menu-btn-1">Live Streaming</a></li>
@@ -113,7 +128,6 @@
         <!-- * 다음 페이지 -->
         <a class="btn next" id="menu-btn-2">Next Page</a>
       </div>
-
       <!--@ 2번 페이지 -->
       <div id="page2">
         <h1>두번째 탭!!!</h1>
@@ -126,19 +140,15 @@
         <a class="btn prev" id="menu-btn-1">Prev Page</a>
         <a class="btn next" id="menu-btn-3">Next Page</a>
       </div>
-
       <!--@ 3번 페이지 -->
       <div id="page3">
         <h1>three.js</h1>
-
-        <div id="css"></div>
-        <div id="webgl"></div>
-        
+        <!-- three.js -->
+        <!-- <div id="css"></div>
+        <div id="webgl"></div> -->
         <a class="btn prev" id="menu-btn-2">Prev Page</a>
         <a class="btn next" id="menu-btn-4">Next Page</a>
       </div>
-      
-      
       <!--@ 4번 페이지 -->
       <div id="page4">
         <h1>AR.js marker</h1>
@@ -146,48 +156,27 @@
         <a class="btn prev" id="menu-btn-3">Prev Page</a>
         <a class="btn next" id="menu-btn-5">Next Page</a>
       </div>
-
       <!--@ 5번 페이지 -->
       <div id="page5">
         <h1>5번째 탭~</h1>
         <a class="btn prev" id="menu-btn-4">Prev Page</a>
         <!-- <a class="btn next" id="menu-btn-6">Next Page</a> -->
-      </div>
-
-
+      </div
+      <!--@ a-video -->
       <!--! a-frame 태그를 숨기기 위해서는 visible 속성을 이용 -->
-      <a-video id="a-video" src="#ex-video_html5_api" position="0 0 0.001" rotation="0 0 0" width="7.5"
+      <a-video id="a-video" src="#ex-video_html5_api" position="0 0 0.1" rotation="0 0 0" width="7.5"
         height="3.7"></a-video>
-      <!-- 두번째 비디오요 -->
-      <a-video id="a-video2" src="#ex-video2_html5_api" position="0 0 0.001" rotation="0 0 0" width="7.5" height="3.7"
+      <!-- 두번째 비디오 -->
+      <a-video id="a-video2" src="#ex-video2_html5_api" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7"
         visible="false"></a-video>
         <!-- gltf 모델 띄우기 -->
-      <a-gltf-model id="page3" src="#3dModel" scale="1 1 1" position="-9 -3 6" rotation="0 90 0" width="7.5" height="3.7"></a-gltf-model>
+        <a-gltf-model id="page3" src="#3dModel" scale="1 1 1" position="-9 -3 6" rotation="0 90 0" width="7.5" height="3.7"></a-gltf-model>
     </a-entity>
 
+    
 
     <!-- ^ 세번째 화면 -->
-    <a-entity id="menu" class="screen menu dark" htmlembed="ppu:256" position="4.732 1.5 -3.826" rotation="0 -45 0" style="width: 600px;">
-      <div class="tab-content model-file-content">
-        <table id="modelFile" class="file-list">
-          <colgroup>
-            <col style="width: 100%">
-          </colgroup>
-          <thead class="thead">
-            <tr>
-              <th>File Name</th>
-            </tr>
-          </thead>
-          <tbody id="tbody" class="tbody">
-            <!-- td 바인딩 -->
-          </tbody>
-        </table>
-      </div>
-    </a-entity>
-
-
-    <!-- ^ 네번째 화면 -->
-    <a-entity id="menu videoMenu" class="screen menu dark" htmlembed="ppu:256" position="5.812 1.5 -2" rotation="0 -90 0">
+    <a-entity id="menu videoMenu" class="screen menu dark" htmlembed="ppu:256" position="4.712 1.6 -4.406" rotation="0 -45 0">
       <h2>Links</h2>
       <a class="imgLink" href="https://aframe.io/" target="_blank">
         <img src="../assets/aframe.png" width="80" height="80">
@@ -203,6 +192,104 @@
       </a>
     </a-entity>
 
+
+    <!--# ========================================= 제2 스크린 =============================================== -->
+
+
+    <!-- ^ 2-1 화면 -->
+    <a-entity id="menu2" class="screen menu2 dark" htmlembed="ppu:256" position="6.812 1.6 -2.3" rotation="0 -45 0" style="width: 600px;">
+      <!-- <h1 style="margin-top: -10px; z-index: 10;">File Name</h1> -->
+      <!-- scroll up -->
+      <a class="scrollUp" id="scrollUp">scroll up
+        <span class="material-icons">arrow_upward</span>
+      </a>
+      <!-- file list -->
+      <div class="tab-content model-file-content">
+        <table id="modelFile" class="file-list">
+          <colgroup>
+            <col style="width: 100%">
+          </colgroup>
+          <thead class="thead">
+          </thead>
+          <tbody id="tbody" class="tbody">
+            <!-- <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">1</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">2</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">3</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">4</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">5</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">6</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">7</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">8</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">9</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">10</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">11</td>
+            </tr>
+            <tr>
+              <td class="model-file-data btn" id="modelFileData${index}">12</td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+      <!-- scroll down -->
+      <a class="scrollDown" id="scrollDown">scroll down
+        <span class="material-icons">arrow_downward</span>
+      </a>
+    </a-entity>
+
+
+    <!--^ 2-2 스크린 -->
+    <a-entity id="main2" class="screen dark main" htmlembed="ppu:256"  position="7.812 1.6 2.6" rotation="0 -90 0">
+      <!-- 동적으로 생성 -->
+      <!-- <div id="sub-page">
+        <h1>video</h1>
+        <button class="btn play-pause-btn" id="sub-play-pause-btn">
+          <span class="material-icons" id="sub-play-pause-icon">play_arrow</span>
+        </button>
+        <button class="btn muted-btn" id="sub-muted-btn">
+          <span class="material-icons" id="sub-muted-icon">volume_up</span>
+        </button>
+      </div>
+
+      <div id="sub-page">
+        <h1>video</h1>
+        <button class="btn play-pause-btn" id="sub-play-pause-btn">
+          <span class="material-icons" id="sub-play-pause-icon">play_arrow</span>
+        </button>
+        <button class="btn muted-btn" id="sub-muted-btn">
+          <span class="material-icons" id="sub-muted-icon">volume_up</span>
+        </button>
+      </div> -->
+      
+      <!--@ a-video -->
+      <a-video id="sub-a-video" src="#sub-video-0_html5_api" position="0 0 0.1" rotation="0 0 0" width="7.5"
+        height="3.7" ></a-video>
+      <a-video id="sub-a-video" src="#sub-video-1_html5_api" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7"
+        visible="false"></a-video>
+    </a-entity>
+
+    <!--^ 2-3 스크린 -->
+
     <!--! 화면(Scene, 장면) 위에 띄우기 -->
     <!-- <a-video src="#ex-video_html5_api" position="3 3 -5" rotation="0 0 0" width="4.8" height="2.7"></a-video> -->
     <!-- <a-box material="src:#tex1" scale="0.5 0.5 0.5" position="0 0.5 -4" id="box" visible="false"></a-box> -->
@@ -210,8 +297,9 @@
 
 
   <script src="../JS/main.js"></script>
-  <script src="../JS/fileList.js"></script>
-  <script type="module" src="./threeMain.js"></script>
+  <script src="../JS/main2.js"></script>
+  <script defer src="../JS/fileList.js"></script>
+  <!-- <script type="module" src="./threeMain.js"></script> -->
 </body>
 
 
