@@ -17,6 +17,12 @@
   <script src="//cdn.dashjs.org/latest/dash.all.debug.js"></script>
   <script src="https://unpkg.com/videojs-contrib-dash/dist/videojs-dash.js"></script>
 
+  <!--# hls.js -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+  <!--# tensorflow -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+
   <!--# material icon -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
@@ -38,7 +44,7 @@
 
   <!--# canvas -->
   <script src="https://cdn.rawgit.com/maxkrieger/aframe-draw-component/5a5d1e66/dist/aframe-draw-component.min.js"></script>
-  <script src="../JS/planeCanvas.js"></script>
+  <!-- <script src="../JS/planeCanvas.js"></script> -->
   
 </head>
 
@@ -53,7 +59,7 @@
   </div>
   <!-- ~ video 2 -->
   <div class="video-container">
-    <video class="video-js" id="ex-video2" width=480 height=270 class="vjs-default-skin" controls>
+    <video id="ex-video2" width=480 height=270 class="vjs-default-skin" controls>
       <!-- <source src="./video/sintel.mp4"> -->
       <!-- <source src="https://ar.idb.ai:8443/rtsp/cam1/index.m3u8"> -->
       <!-- <source src="./video/202301231237.ts"> -->
@@ -75,14 +81,22 @@
       <!-- <source src="../video/sintel.mp4"> -->
     </video>
   </div>
-  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ video.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-  <!-- ~~~~~ image -->
-  <img width=480 height=270 id="picture" src="https://ar.idb.ai:5000/video_feed" style="display:none" />
-  <canvas width=480 height=270 id="myCanvas"></canvas>
-  <!-- ~~~~~ image -->
-  <!-- ~~~~~~~~~~~~~~~~~ img+canvas => video -->
-  <video class="video-js" id="video-canvas" width=480 height=270 class="vjs-default-skin" autoplay></video>
-  <!-- ~~~~~~~~~~~~~~~~~ img+canvas => video -->
+
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ hls.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <div id="main">
+    <div class="container">
+      <div class="canvas-wrapper">
+        <canvas id="output" style="width:300;height:200;display:none;"></canvas>
+		<!--video id="tvideo" autoplay muted style="width:300;height:200">
+		</video-->
+        <video id="video" autoplay muted style="width:300;height:200;display:none;">
+        </video>
+		<video id="video2" autoplay muted style="width:0;height:0;"></video>
+      </div>
+    </div>
+  </div>
+
+  
   <!-- 장면에다가 fog="type: linear; color: #222; 를 주면 배경이 가려짐 -->
   <a-scene  far: 20;">
     <!--@ assets -->
@@ -298,20 +312,7 @@
 
 
     <!--# ========================================= 제3 스크린 =============================================== -->
-    <a-plane acanvas position="7.812 1.6 10" rotation="0 -90 0" width="6" height="4"></a-plane>
-    
-    <!-- <a-plane yolo position="-7.812 1.6 10" rotation="0 90 0" width="6" height="4"></a-plane> -->
-
-    <!-- <a-plane yolo2 position="-7.812 1.6 30" rotation="0 90 0" width="6" height="4"></a-plane> -->
-
-    <!-- <a-entity id="plane" class="screen dark main" htmlembed="ppu:256"  position="-7.812 1.6 10" rotation="0 90 0">
-        <a-video position="0 0 0.1" autoplay muted id="video-canvas"></a-video>
-      </a-entity> -->
-      <a-video position="-7.812 1.6 10" autoplay muted id="a-video-canvas"></a-video>
-    
-    <!-- <a-plane id="video-border" width="3" height="3" position="0 0 0" color="#440000" video-controls>
-      <a-video id="video-display" width="3" height="3" position="0 0 0.1" src="https://cdn.aframe.io/videos/bunny.mp4" controls></a-video>
-    </a-plane> -->
+      <a-video src="#video2" position="-7.812 1.6 10" rotation="0 90 0" width="4" height="2.5" id="a-video-canvas"></a-video>
   </a-scene>
 
 
@@ -319,6 +320,7 @@
   <script src="../JS/main2.js"></script>
   <script defer src="../JS/fileList.js"></script>
   <script src="../JS/imgCanvasVideo.js"></script>
+  <script src="../JS/tensorflow.js">  </script>
   <!-- <script type="module" src="./threeMain.js"></script> -->
 </body>
 
