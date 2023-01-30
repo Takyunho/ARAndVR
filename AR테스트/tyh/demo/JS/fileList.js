@@ -144,7 +144,7 @@ function showVideo() {
         sub_muted_icon[i].innerText = "volume_up";
       } else {
         subPlayer[i].muted(true);
-        sub_muted_icon[i].innerText = "volume_down";
+        sub_muted_icon[i].innerText = "volume_off";
       }
 
     });
