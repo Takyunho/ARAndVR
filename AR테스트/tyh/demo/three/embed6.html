@@ -20,7 +20,6 @@
   <!--# material icon -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
-  <!--@ three.js -->
   <!--# Google Font(Noto Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,12 +31,15 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <!--# moment -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-
-
   <!--# css -->
   <link rel="stylesheet" href="embed6.css">
   <link rel="stylesheet" href="./three2.css">
   <!-- <link rel="stylesheet" href="./three/alarmStyle2.css"> -->
+
+  <!--# canvas -->
+  <script src="https://cdn.rawgit.com/maxkrieger/aframe-draw-component/5a5d1e66/dist/aframe-draw-component.min.js"></script>
+  <script src="../JS/planeCanvas.js"></script>
+  
 </head>
 
 <body id="body">
@@ -74,7 +76,13 @@
     </video>
   </div>
   <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ video.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+  <!-- ~~~~~ image -->
+  <img width=480 height=270 id="picture" src="https://ar.idb.ai:5000/video_feed" style="display:none" />
+  <canvas width=480 height=270 id="myCanvas"></canvas>
+  <!-- ~~~~~ image -->
+  <!-- ~~~~~~~~~~~~~~~~~ img+canvas => video -->
+  <video class="video-js" id="video-canvas" width=480 height=270 class="vjs-default-skin" autoplay></video>
+  <!-- ~~~~~~~~~~~~~~~~~ img+canvas => video -->
   <!-- 장면에다가 fog="type: linear; color: #222; 를 주면 배경이 가려짐 -->
   <a-scene  far: 20;">
     <!--@ assets -->
@@ -288,17 +296,29 @@
         visible="false"></a-video>
     </a-entity>
 
-    <!--^ 2-3 스크린 -->
 
-    <!--! 화면(Scene, 장면) 위에 띄우기 -->
-    <!-- <a-video src="#ex-video_html5_api" position="3 3 -5" rotation="0 0 0" width="4.8" height="2.7"></a-video> -->
-    <!-- <a-box material="src:#tex1" scale="0.5 0.5 0.5" position="0 0.5 -4" id="box" visible="false"></a-box> -->
+    <!--# ========================================= 제3 스크린 =============================================== -->
+    <a-plane acanvas position="7.812 1.6 10" rotation="0 -90 0" width="6" height="4"></a-plane>
+    
+    <!-- <a-plane yolo position="-7.812 1.6 10" rotation="0 90 0" width="6" height="4"></a-plane> -->
+
+    <!-- <a-plane yolo2 position="-7.812 1.6 30" rotation="0 90 0" width="6" height="4"></a-plane> -->
+
+    <!-- <a-entity id="plane" class="screen dark main" htmlembed="ppu:256"  position="-7.812 1.6 10" rotation="0 90 0">
+        <a-video position="0 0 0.1" autoplay muted id="video-canvas"></a-video>
+      </a-entity> -->
+      <a-video position="-7.812 1.6 10" autoplay muted id="a-video-canvas"></a-video>
+    
+    <!-- <a-plane id="video-border" width="3" height="3" position="0 0 0" color="#440000" video-controls>
+      <a-video id="video-display" width="3" height="3" position="0 0 0.1" src="https://cdn.aframe.io/videos/bunny.mp4" controls></a-video>
+    </a-plane> -->
   </a-scene>
 
 
   <script src="../JS/main.js"></script>
   <script src="../JS/main2.js"></script>
   <script defer src="../JS/fileList.js"></script>
+  <script src="../JS/imgCanvasVideo.js"></script>
   <!-- <script type="module" src="./threeMain.js"></script> -->
 </body>
 

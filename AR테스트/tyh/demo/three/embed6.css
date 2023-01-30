@@ -170,6 +170,7 @@ a.imgLink:hover {
   display: none;
 }
 
+
 .video-wrap {
   display: none;
   background-color: #00d2ff;
@@ -266,4 +267,13 @@ a.imgLink:hover {
   background-color: #444;
   text-shadow: none;
   display: block;
+}
+
+#myCanvas {
+  z-index: 5;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 2px solid #fff;
+  display: none;
 }
