@@ -1,0 +1,8 @@
+Model Information:
+* title:	Asian House
+* source:	https://sketchfab.com/3d-models/asian-house-2e53bec7490646f09f74f060b1063a72
+* author:	studio lab (https://sketchfab.com/leonlabyk)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
