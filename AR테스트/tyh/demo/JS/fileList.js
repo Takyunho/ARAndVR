@@ -1,6 +1,5 @@
 const fileListUrl = `https://mds.idb.ai:50000/mp4_list`; // 영상파일 리스트 불러오는 api
-// const fileListUrl = `https://ar.idb.ai:50000/mp4_list`; // 영상파일 리스트 불러오는 api
-// const fileListUrl = `https://211.219.71.101:50000/mp4_list`; // 영상파일 리스트 불러오는 api
+
 
 const getFileListData = async () => {
   const response = await fetch(fileListUrl);
@@ -36,10 +35,9 @@ getFileListData().then((result) => {
 
 
 
-//^ 텍스트 데이터를 화면에 바인딩
 function showFileList(pathArr, fileNameArr) {
-  console.log(pathArr);
-  console.log(fileNameArr);
+  // console.log(pathArr);
+  // console.log(fileNameArr);
 
   const tbody = document.getElementById("tbody");
 
@@ -54,14 +52,13 @@ function showFileList(pathArr, fileNameArr) {
 
     // click 시 비디오 소스 바꾸기
     file_name[index].addEventListener("click", () => {
-      // console.log(file_name[index])
       const subVideo = document.querySelector("#sub-video");
       // console.log(subVideo);
       
       subVideo.innerHTML = `
-        <source src="https://mds.idb.ai:9443${pathArr[index]}">
+        <source src="https://mds.idb.ai:9999${pathArr[index]}">
       `
-      console.log(subVideo);
+      // console.log(subVideo);
     })
 
   });
