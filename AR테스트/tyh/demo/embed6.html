@@ -16,6 +16,7 @@
   <script src="https://unpkg.com/videojs-contrib-dash/dist/videojs-dash.js"></script>
   <!--# hls.js -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="./JS/hls.min.js"></script>
   <!--# tensorflow -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
   <!--# material icon -->
@@ -30,7 +31,8 @@
   <link rel="stylesheet" href="./embed6.css">
   <!-- <link rel="stylesheet" href="./three2.css"> -->
   <!--# canvas -->
-  <script src="https://cdn.rawgit.com/maxkrieger/aframe-draw-component/5a5d1e66/dist/aframe-draw-component.min.js"></script>
+  <script
+    src="https://cdn.rawgit.com/maxkrieger/aframe-draw-component/5a5d1e66/dist/aframe-draw-component.min.js"></script>
 
 </head>
 
@@ -39,7 +41,7 @@
   <!--# main video 1 (video.js로 m3u8)-->
   <div class="video__container--main">
     <video class="video-js" id="main-video-0" width=480 height=270 class="vjs-default-skin" controls>
-      <source src="https://ar.idb.ai:8443/rtsp/cam1/index.m3u8">
+      <!-- <source src="https://ar.idb.ai:8443/rtsp/cam1/index.m3u8"> -->
     </video>
   </div>
   <!--# main video 2 (일반 비디오로 mp4)-->
@@ -55,12 +57,6 @@
     <video autoplay muted id="sub-video" width=500 height=300>
     </video>
   </div>
-  <!--# sub video 2 -->
-  <!-- <div class="video__container--sub">
-    <video class="video-js video--sub" id="sub-video-1" width=480 height=270 class="vjs-default-skin" controls>
-      <source src="../video/Sunset.mp4">
-    </video>
-  </div> -->
 
 
   <!--# yolo video -->
@@ -75,55 +71,65 @@
   </div>
 
   <!--# hls.js로 rtsp -->
-  <video id="video-rtsp1" autoplay muted></video>
-
+  <!-- <video id="video-rtsp1" autoplay muted></video> -->
   <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ video end ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 
 
-
-
-
-
   <!-- 장면에다가 fog="type: linear; color: #222; 를 주면 배경이 가려짐 -->
-  <a-scene far: 20;">
+  <a-scene far: 30; webxr="requiredFeatures: hit-test,local-floor; 
+  optionalFeatures: dom-overlay,unbounded; 
+  overlayElement: #overlay;">
     <!--@ assets -->
     <a-assets timeout="1000">
-      <img id="floor" src="./images/floor.png">
-      <!-- <img id="sky" src="../images/stars.jpg"  /> -->
-      <img id="sky" src="./images/mountain.jpg" />
-      <!-- <img id="sky" src="./images/spherical-photo.jpg" /> -->
+      <!-- <img id="floor" src="./images/floor.png"> -->
+      <!-- <img id="sky" src="./images/stars.jpg"  /> -->
+      <!-- <img id="sky" src="./images/mountain.jpg" /> -->
+      <img id="sky" src="./images/industrial_sunset_02_puresky.webp" />
+      <img id="floor" src="./images/FloorStreets0100_1_download600.jpg">
+
+      <a-asset-item id="factory" src="../../models/abandoned_factory/scene.gltf"></a-asset-item>
+      <!-- <a-asset-item id="factory2" src="../../models/abandoned_factory2/scene.gltf"></a-asset-item> -->
+      <!-- <a-asset-item id="factory" src="../../models/asian_house/scene.gltf"></a-asset-item> -->
+
       <a-asset-item id="3dModel" src="./three/machine_011_light.gltf"></a-asset-item>
       <!-- # src 동적으로 받아와서 넣는 비디오 -->
       <video autoplay muted id="sub-video" width=500 height=300></video>
     </a-assets>
+
     <!--@ 배경 -->
-    <a-plane material="src:#floor; repeat: 700 700; transparent: true;" height="800" width="800" rotation="-90 0 0"
-      position="0 -2 0"></a-plane>
+    <!-- <a-plane material="src:#floor; repeat: 700 700; transparent: true;" height="800" width="800" rotation="-90 0 0" position="0 -2 0"></a-plane> -->
+    <!-- <a-plane color="#333" width="200" height="200" rotation="-90 0 0" position="0 -1.9 3"></a-plane> -->
+    <a-plane material="src:#floor; repeat: 100 100; transparent: true;" width="200" height="200" rotation="-90 0 0"
+      position="0 -3 3"></a-plane>
     <a-sky src="#sky"></a-sky>
+
     <!--@ 카메라 및 레이캐스터 -->
     <a-entity id="cameraRig">
       <!-- <a-camera id="camera"></a-camera> -->
       <!-- wasd 컨트롤 -->
-      <a-entity camera look-controls wasd-controls="acceleration: 400" position="0 1.6 0"></a-entity>
+      <!-- <a-entity camera look-controls wasd-controls="acceleration: 400" position="0 1.6 10"></a-entity> -->
+      <a-entity id="cameraEntity" camera look-controls wasd-controls="acceleration: 800" position="0 0 10"></a-entity>
       <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen"></a-entity>
       <a-entity laser-controls raycaster="objects: .screen;"></a-entity>
     </a-entity>
 
 
+    <!--# ========================================= 제1(main) 스크린 =============================================== -->
     <!--^ 첫번째 스크린 (메뉴가 달려있는 스크린) -->
-    <a-entity id="menu" class="screen menu dark" htmlembed="ppu:256" position="-4.712 1.6 -4.406" rotation="0 45 0">
+    <a-entity id="menu" class="screen menu dark" htmlembed="ppu:256" position="-4.712 1 -4.406" rotation="0 45 0">
       <h2>Menu</h2>
       <ul>
         <li><a class="btn" id="menu-btn-1">Live Streaming</a></li>
         <li><a class="btn" id="menu-btn-2">mp4</a></li>
-        <li><a class="btn" id="menu-btn-3">3D Model</a></li>
+        <li><a class="btn" id="menu-btn-3">3</a></li>
         <li><a class="btn" id="menu-btn-4">AR</a></li>
-        <li><a class="btn" id="menu-btn-5">5번째</a></li>
+        <li><a class="btn" id="menu-btn-5">5</a></li>
       </ul>
     </a-entity>
+
     <!--^ 메인스크린 -->
-    <a-entity id="main" class="screen dark main" htmlembed="ppu:256" position="0 1.6 -5">
+    <a-entity id="main" class="screen dark main" htmlembed="ppu:256" position="0 1 -5">
       <!--@ 1번 페이지  -->
       <div id="page1">
         <h1>Video</h1>
@@ -153,9 +159,6 @@
       <!--@ 3번 페이지 -->
       <div id="page3">
         <h1>three.js</h1>
-        <!-- three.js -->
-        <!-- <div id="css"></div>
-        <div id="webgl"></div> -->
         <a class="btn prev" id="menu-btn-2">Prev Page</a>
         <a class="btn next" id="menu-btn-4">Next Page</a>
       </div>
@@ -164,7 +167,7 @@
         <h1>AR.js marker</h1>
         <img src="./three/marker.png" alt="" height="980px">
         <a class="btn prev" id="menu-btn-3">Prev Page</a>
-        <a class="btn next" id="menu-btn-5">Next Page</a>
+        <!-- <a class="btn next" id="menu-btn-5">Next Page</a> -->
       </div>
       <!--@ 5번 페이지 -->
       <div id="page5">
@@ -173,17 +176,16 @@
       </div> 
       <!--@ a-video -->
       <!--! a-frame 태그를 숨기기 위해서는 visible 속성을 이용 -->
-      <a-video id="a-video-0" src="#main-video-0" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7"></a-video>
+      <a-video id="a-video-0" src="#main-video-0_html5_api" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7"></a-video>
       <!-- local에 있으니까 html5_api로 id 가져오기 -->
       <a-video id="a-video-1" src="#main-video-1_html5_api" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7" visible="false"></a-video>
 
-      <a-gltf-model id="page3" src="#3dModel" scale="1 1 1" position="-9 -3 6" rotation="0 90 0" width="7.5" height="3.7"></a-gltf-model>
+      <a-gltf-model id="page3" src="#3dModel" scale="1 1 1" position="-9 -4 6" rotation="0 90 0" width="7.5" height="3.7"></a-gltf-model>
     </a-entity>
 
 
-
-    <!-- ^ 세번째 화면 -->
-    <a-entity id="menu videoMenu" class="screen menu dark" htmlembed="ppu:256" position="4.712 1.6 -4.406"
+    <!-- ^ 세번째 스크린(링크)-->
+    <a-entity id="menu videoMenu" class="screen menu dark" htmlembed="ppu:256" position="4.712 1 -4.406"
       rotation="0 -45 0">
       <h2>Links</h2>
       <a class="imgLink" href="https://aframe.io/" target="_blank">
@@ -201,10 +203,12 @@
     </a-entity>
 
 
+
+
     <!--# ========================================= 제2(sub) 스크린 =============================================== -->
     <!-- ^ sub 스크린1 -->
-    <a-entity id="menu2" class="screen menu2 dark" htmlembed="ppu:256" position="6.812 1.6 -2.3" rotation="0 -45 0" style="width: 600px;">
-      <!-- <h1 style="margin-top: -10px; z-index: 10;">File Name</h1> -->
+    <a-entity id="menu2" class="screen menu2 dark" htmlembed="ppu:256" position="6.812 1 -2.3" rotation="0 -45 0"
+      style="width: 600px;">
       <!-- scroll up -->
       <a class="scrollUp" id="scrollUp">scroll up<span class="material-icons">arrow_upward</span></a>
       <!-- file list -->
@@ -228,30 +232,16 @@
     </a-entity>
 
     <!--^ sub 스크린2 -->
-    <a-entity id="main2" class="screen dark main" htmlembed="ppu:256" position="7.812 1.6 2.6" rotation="0 -90 0">
+    <a-entity id="main2" class="screen dark main" htmlembed="ppu:256" position="7.812 1 2.6" rotation="0 -90 0">
       <!-- 동적으로 생성 -->
       <div id="sub-page">
         <h1>video</h1>
-        <!-- <button class="btn play-pause-btn" id="sub-play-pause-btn">
-          <span class="material-icons" id="sub-play-pause-icon">play_arrow</span>
-        </button>
-        <button class="btn muted-btn" id="sub-muted-btn">
-          <span class="material-icons" id="sub-muted-icon">volume_up</span>
-        </button> -->
       </div>
 
-      <!-- <div id="sub-page">
-        <h1>video</h1>
-        <button class="btn play-pause-btn" id="sub-play-pause-btn">
-          <span class="material-icons" id="sub-play-pause-icon">play_arrow</span>
-        </button>
-        <button class="btn muted-btn" id="sub-muted-btn">
-          <span class="material-icons" id="sub-muted-icon">volume_up</span>
-        </button>
-      </div> -->
 
       <!--@ a-video -->
-      <a-video id="sub-a-video" src="#sub-video" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7" visible="true"></a-video>
+      <a-video id="sub-a-video" src="#sub-video" position="0 0 0.05" rotation="0 0 0" width="7.5" height="3.7"
+        visible="true"></a-video>
       <!-- <a-video id="sub-a-video" src="#sub-video-1_html5_api" position="0 0 0.1" rotation="0 0 0" width="7.5"
         height="3.7" visible="false"></a-video> -->
     </a-entity>
@@ -259,12 +249,18 @@
 
     <!--# ========================================= 제3 스크린 =============================================== -->
     <!-- hls.js + canvas (yolo) -->
-    <a-video src="#video2" position="-7.812 1.6 10" rotation="0 90 0" width="4" height="2.5" id="a-video-canvas"></a-video>
+    <a-video src="#video2" position="-7.812 0 10" rotation="0 90 0" width="4" height="2.5"
+      id="a-video-canvas"></a-video>
 
+
+
+
+    <!-- - gltf -->
+    <!-- <a-entity gltf-model="#factory" position="25 -2 0" scale="0.02 0.02 0.02"></a-entity> -->
+    <a-entity gltf-model="#factory2" position="30 7 0" rotation="0 -70 0" scale="2 2 2"></a-entity>
   </a-scene>
-  <a-scene>
-    
-  </a-scene>
+  
+
 
 
   <script src="./JS/mainScreen.js"></script>
@@ -273,6 +269,7 @@
   <script defer src="./JS/fileList.js"></script>
   <script src="./JS/imgCanvasVideo.js"></script>
   <script src="./JS/tensorflow.js">  </script>
+  <script src="./JS/video.js"></script>
   <!-- <script type="module" src="./threeMain.js"></script> -->
 </body>
 
