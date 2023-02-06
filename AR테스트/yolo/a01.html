@@ -1,0 +1,27 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<video id="video" autoplay muted style="width:320;height:200;">
+	<!--source src="https://mds.idb.ai:9443/media/rtsp/cam1/2023/01/31/13/202301311332.mp4"-->
+	<!--source src="https://www.w3schools.com/html/mov_bbb.mp4"-->
+	<!--source src="chrome.mp4"-->
+    <!--source src="https://ar.idb.ai:8443/rtsp/cam1/index.m3u8"-->
+</video>
+<video id="video2" autoplay muted style="width:320;height:200;">
+</video>
+
+<script>
+
+	var video = document.getElementById('video');
+	var video2 = document.getElementById('video2');
+
+	var hls = new Hls();
+	hls.loadSource('https://ar.idb.ai:8443/rtsp/cam1/index.m3u8');
+	hls.attachMedia(video2);
+	
+	/*
+    video.addEventListener('play', (event) => {
+        var stream = video.captureStream();
+        video2.srcObject = stream;
+    });
+	*/
+</script>
