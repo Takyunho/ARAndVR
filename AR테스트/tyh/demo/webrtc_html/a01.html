@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <script src="video.js"></script>
+        <script src="hls.min.js"></script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                width: 0;
+                height: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <video id="video" style="width: 430px;"></video>
+        <script>
+
+            const videoId = "webrtc:rtsp3";
+
+            async function onSubscribe() {
+                let video = document.querySelector("#video");
+                video.muted = true;
+                await $video.subscribe(video, videoId, "primary-camera", false, true, "");
+            }
+
+						onSubscribe().then(function(){
+							setTimeout(function(){
+								let video = document.querySelector("#video");
+							},10000);
+						})
+            
+
+        </script>
+        <video id="video2" style="width: 430px;"></video>
+        <script>
+
+            const videoId2 = "webrtc:rtsp2";
+
+            async function onSubscribe() {
+                let video2 = document.querySelector("#video2");
+                video2.muted = true;
+                await $video.subscribe(video2, videoId2, "primary-camera", false, true, "");
+            }
+
+						onSubscribe().then(function(){
+							setTimeout(function(){
+								let video2 = document.querySelector("#video2");
+							},10000);
+						})
+            
+
+        </script>
+    </body>
+</html>
+
+
