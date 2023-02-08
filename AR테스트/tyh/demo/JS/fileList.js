@@ -1,4 +1,4 @@
-const fileListUrl = `https://mds.idb.ai:50000/mp4_list`; // 영상파일 리스트 불러오는 api
+const fileListUrl = `https://mds.t2v.kr:50000/mp4_list`; // 영상파일 리스트 불러오는 api
 
 
 const getFileListData = async () => {
@@ -56,7 +56,7 @@ function showFileList(pathArr, fileNameArr) {
       // console.log(subVideo);
       
       subVideo.innerHTML = `
-        <source src="https://mds.idb.ai:9999${pathArr[index]}">
+        <source src="https://mds.t2v.kr:9999${pathArr[index]}">
       `
       // console.log(subVideo);
     })

@@ -1,96 +1,92 @@
+(function () {
+  const LIST = document.querySelectorAll(".list"); //# 메뉴 버튼 리스트
+  const MENU_BTN = document.querySelectorAll("#menuBtn"); //# 메뉴 버튼
+  const PAGE = document.querySelectorAll("#page"); //# 메인 페이지
+  const MAIN_VIDEO = document.querySelectorAll(".main-video"); //# 비디오
+  const MAIN_A_VIDEO = document.querySelectorAll("#main-a-video"); //# a-video
 
-const LIST = document.querySelectorAll(".list");    //# 메뉴 버튼 리스트
-const MENU_BTN = document.querySelectorAll("#menuBtn");   //# 메뉴 버튼
-const PAGE = document.querySelectorAll("#page");    //# 메인 페이지
-const MAIN_VIDEO = document.querySelectorAll(".main-video");    //# 비디오
-const MAIN_A_VIDEO = document.querySelectorAll("#main-a-video");    //# a-video
+  LIST[0].addEventListener("click", function (e) {
+    // 이벤트 버블링 활용
+    if (e.target == MENU_BTN[0]) {
+      movePageAndopenVideo(0);
+    }
+    if (e.target == MENU_BTN[1]) {
+      movePageAndopenVideo(1);
+    }
+    if (e.target == MENU_BTN[2]) {
+      movePageAndopenVideo(2);
+    }
+    if (e.target == MENU_BTN[3]) {
+      movePageAndopenVideo(3);
+    }
+    if (e.target == MENU_BTN[4]) {
+      movePageAndopenVideo(4);
+    }
+    //idea : for문으로 줄일 수 있다
+  });
 
-
-LIST[0].addEventListener("click", function (e) {    // 이벤트 버블링 활용
-  if (e.target == MENU_BTN[0]) {
+  //! 페이지 이동과 동시에 해당하는 비디오 오픈하기
+  const movePageAndopenVideo = (i) => {
     closeTab(); // 다 닫은다음에
-    openTab(0); // 특정탭만 열자
+    openTab(i); // 특정탭만 열자
 
-    // 만약에 비디오가 있으면 비디오 오픈/클로즈 실행
-    if (MAIN_A_VIDEO[0]) {
-      closeVideo();
-      openVideo(0);
+    // 만약에 비디오가 있으면
+    if (MAIN_A_VIDEO[i]) {
+      closeVideo(); // 비디오 전부닫고
+      openVideo(i); // 특정 비디오면 보여주기
     } else {
-      closeVideo();
+      closeVideo(); // 비디오 전부닫기
     }
-  }
-  if (e.target == MENU_BTN[1]) {
-    closeTab();
-    openTab(1);
+  };
 
-    if (MAIN_A_VIDEO[1]) {
-      closeVideo();
-      openVideo(1);
-    } else {
-      closeVideo();
+  const openTab = (i) => {
+    PAGE[i].classList.remove("hide");
+    PAGE[i].classList.add("show");
+  };
+
+  const closeTab = () => {
+    for (let i = 0; i < MENU_BTN.length; i++) {
+      PAGE[i].classList.remove("show");
+      PAGE[i].classList.add("hide");
     }
-  }
-  if (e.target == MENU_BTN[2]) {
-    closeTab();
-    openTab(2);
+  };
 
-    if (MAIN_A_VIDEO[2]) {
-      closeVideo();
-      openVideo(2);
-    } else {
-      closeVideo();
+  const openVideo = (i) => {
+    MAIN_A_VIDEO[i].setAttribute("visible", true);
+  };
+
+  const closeVideo = () => {
+    for (let i = 0; i < MAIN_A_VIDEO.length; i++) {
+      MAIN_A_VIDEO[i].setAttribute("visible", false);
     }
+  };
+
+  // 이벤트 버블링 미활용 (next, prev 버튼)
+  const NEXT_BTN = document.querySelectorAll("#menu-btn-next");
+  // console.log(NEXT_BTN);
+
+  //* 다음버튼
+  for (let i = 0; i < NEXT_BTN.length; i++) {
+    NEXT_BTN[i].addEventListener("click", function () {
+      if (i === i) {
+        movePageAndopenVideo(i + 1);
+      }
+    });
   }
-  if (e.target == MENU_BTN[3]) {
-    closeTab();
-    openTab(3);
 
-    if (MAIN_A_VIDEO[3]) {
-      closeVideo();
-      openVideo(3);
-    } else {
-      closeVideo();
-    }
+  //* 이전버튼
+  const PREV_BTN = document.querySelectorAll("#menu-btn-prev");
+  // console.log(PREV_BTN);
+
+  for (let i = 0; i < PREV_BTN.length; i++) {
+    PREV_BTN[i].addEventListener("click", function () {
+      if (i === i) {
+        // i가 0이면 0을 넣고 1이면 1을 넣고..
+        movePageAndopenVideo(i);
+      }
+    });
   }
-  if (e.target == MENU_BTN[4]) {
-    closeTab();
-    openTab(4);
-
-    if (MAIN_A_VIDEO[4]) {
-      closeVideo();
-      openVideo(4);
-    } else {
-      closeVideo();
-    }
-  }
-});
-
-const openTab = (i) => {
-  PAGE[i].classList.remove("hide");
-  PAGE[i].classList.add("show");
-};
-
-const closeTab = () => {
-  for (let i = 0; i < MENU_BTN.length; i++) {
-    PAGE[i].classList.remove("show");
-    PAGE[i].classList.add("hide");
-  }
-};
-
-const openVideo = (i) => {
-  MAIN_A_VIDEO[i].setAttribute("visible", true);
-};
-
-const closeVideo = () => {
-  for (let i = 0; i < MAIN_A_VIDEO.length; i++) {
-    MAIN_A_VIDEO[i].setAttribute("visible", false);
-  }
-};
-
-
-
-
-
+})();
 
 // for (let i = 0; i < MENU_BTN.length; i++) {
 //   MENU_BTN[i].addEventListener("click", function () {

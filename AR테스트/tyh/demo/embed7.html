@@ -48,9 +48,21 @@
     <video id="main-video-1" class="main-video" style="width: 430px;"></video>
   </div>
   <!-- # main video 3 (yolo) -->
-  <div class="video__container--main">
+  <!-- <div class="video__container--main">
     <video id="main-video-2" class="main-video" style="width: 430px;"></video>
+  </div> -->
+  <!--# yolo video -->
+  <div id="main">
+    <div class="container">
+      <div class="canvas-wrapper" >
+        <video id="video" autoplay muted style="width:300; height:200; display: none; "></video>
+        <canvas id="output" style="width:300; height:200; display: none;"></canvas>
+        <video id="video2" autoplay muted style="width: 0; height: 0;"></video>
+        <!-- cf) video2까지 display: none을 걸면 a-video에서 동작하지 않음 -->
+      </div>
+    </div>
   </div>
+
 
   <!--# sub video 1 -->
   <div class="video__container--sub">
@@ -58,16 +70,7 @@
     </video>
   </div>
 
-  <!--# yolo video -->
-  <!-- <div id="main">
-    <div class="container">
-      <div class="canvas-wrapper">
-        <video id="video" autoplay muted style="width:300; height:200; display:none;"></video>
-        <canvas id="output" style="width:300; height:200; display: none;"></canvas>
-        <video id="video2" autoplay muted style="width: 0; height: 0;"></video>
-      </div>
-    </div>
-  </div> -->
+  
 
   <!--# hls.js로 rtsp -->
   <!-- <video id="video-rtsp1" autoplay muted></video> -->
@@ -77,7 +80,10 @@
 
   <!-- 장면에다가 fog="type: linear; color: #222; 를 주면 배경이 가려짐 -->
   <a-scene far: 30; webxr="requiredFeatures: hit-test,local-floor; optionalFeatures: dom-overlay,unbounded; overlayElement: #overlay;" >
-    <!-- <a-light id="dirlight" intensity="1" light="castShadow:true; type:directional" position="40 6 1"></a-light> -->
+    <a-light id="dirlight" intensity="1" light="castShadow:true; type:ambient" color="#e3d3c6" position="40 6 1"></a-light>
+    <!-- <a-light id="dirlight" intensity="1" light="castShadow:true; type:directional" position="0 6 1"></a-light>
+    <a-light id="dirlight" intensity="1" light="castShadow:true; type:directional" position="10 3 1"></a-light>
+    <a-light id="dirlight" intensity="1" light="castShadow:true; type:directional" position="10 3 1"></a-light> -->
     <!--@ assets -->
     <a-assets timeout="1000">
       <!-- <img id="floor" src="./images/floor.png"> -->
@@ -86,16 +92,17 @@
       <img id="sky" src="./images/industrial_sunset_02_puresky.webp" />
       <img id="floor" src="./images/FloorStreets0100_1_download600.jpg">
       <img id="floor2" src="./images/FloorStreets_1.jpg">
+      <!-- factory -->
       <a-asset-item id="factory" src="../../models/factory/scene.gltf"></a-asset-item>
       <a-asset-item id="factory2" src="../../models/abandoned_factory2/scene.gltf"></a-asset-item>
       <a-asset-item id="victorian-factory" src="../../models/victorian_factory/scene.gltf"></a-asset-item>
-      <!-- <a-asset-item id="factory" src="../../models/asian_house/scene.gltf"></a-asset-item> -->
+      <!-- 3d model -->
       <a-asset-item id="3dModel" src="./three/machine_011_light.gltf"></a-asset-item>
-
+      <!-- server -->
       <a-asset-item id="server1" src="../../models/server_racking_system/scene.gltf"></a-asset-item>
       <a-asset-item id="server2" src="../../models/server/scene.gltf"></a-asset-item>
-      <!-- # src 동적으로 받아와서 넣는 비디오 -->
-      <!-- <video autoplay muted id="sub-video" width=500 height=300></video> -->
+      <a-asset-item id="server3" src="../../models/server_rack_and_console_v3/scene.gltf"></a-asset-item>
+      
     </a-assets>
 
     <!--@ 배경 -->
@@ -107,7 +114,7 @@
     <!--@ 카메라 및 레이캐스터 -->
     <a-entity id="cameraRig">
       <!-- wasd 컨트롤 -->
-      <a-entity id="cameraEntity" camera look-controls wasd-controls="acceleration: 800" position="-5 0 0"></a-entity>
+      <a-entity id="cameraEntity" camera look-controls wasd-controls="acceleration: 800" position="0 1 0"></a-entity>
       <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen"></a-entity>
       <a-entity laser-controls raycaster="objects: .screen;"></a-entity>
     </a-entity>
@@ -120,7 +127,7 @@
       <ul class="list">
         <li><a class="btn" id="menuBtn">Live Streaming1</a></li>
         <li><a class="btn" id="menuBtn">Live Streaming2</a></li>
-        <li><a class="btn" id="menuBtn">3</a></li>
+        <li><a class="btn" id="menuBtn">yolo Video</a></li>
         <li><a class="btn" id="menuBtn">4</a></li>
         <li><a class="btn" id="menuBtn">AR</a></li>
       </ul>
@@ -162,8 +169,8 @@
       <a-video id="main-a-video" src="#main-video-0" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7"></a-video>
       <!-- local에 있으니까 html5_api로 id 가져오기 -->
       <a-video id="main-a-video" src="#main-video-1" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7" visible="false"></a-video>
-      <a-video id="main-a-video" src="#main-video-2" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7" visible="false"></a-video>
-      <!-- <a-video src="#video2" position="-7.812 0 10" rotation="0 90 0" width="4" height="2.5" id="a-video-canvas"></a-video> -->
+      <!-- <a-video id="main-a-video" src="#main-video-2" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7" visible="false"></a-video> -->
+      <a-video id="main-a-video" src="#video2" position="0 0 0.1" rotation="0 0 0" width="7.5" height="3.7" visible="false"></a-video>
       
     </a-entity>
 
@@ -227,7 +234,6 @@
     </a-entity>
 
 
-
     <!-- - gltf -->
     <a-gltf-model id="page3" src="#3dModel" scale="1 1 1" position="11 -2.1 -18" rotation="0 0 0" width="7.5" height="3.7"></a-gltf-model>
 
@@ -236,8 +242,6 @@
       <a-entity light="type: ambient; color: #BBB"></a-entity>
       <a-entity light="type: directional; color: #FFF; intensity: 0.8" position="-0.5 1 1"></a-entity>
     </a-entity>
-    <!-- <a-entity gltf-model="#factory2" position="30 7 0" rotation="0 -70 0" scale="2 2 2"></a-entity> -->
-    <!-- <a-entity gltf-model="#victorian-factory" position="-7 -3 2" rotation="0 0 0" scale="4 4 4" animation-mixer></a-entity> -->
 
     <!-- server gltf -->
     <a-entity gltf-model="#server1" position="-19 -2.5 10" rotation="0 90 0" scale="2 2 2">
@@ -245,55 +249,66 @@
       <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-15 8 1"></a-entity>
     </a-entity>
     <a-entity gltf-model="#server2" position="-19 -2.1 5" scale="0.02 0.02 0.02"></a-entity>
+    <a-entity gltf-model="#server3" position="-19 -2.1 0" scale="1 1 1">
+      <!-- <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-15 8 2"></a-entity> -->
+    </a-entity>
+    
   </a-scene>
   
   <!-- 메인 비디오  -->
   <script>
-    const VIDEO_ID_0 = "webrtc:rtsp3";
+    // 비디오 0
+    (function () {
+      const VIDEO_ID_0 = "webrtc:rtsp3";
+
+      async function onSubscribe() {
+          let video = document.querySelector("#main-video-0");
+          video.muted = true;
+          await $video.subscribe(video, VIDEO_ID_0, "primary-camera", false, true, "");
+      }
+
+      onSubscribe().then(function(){
+        setTimeout(function(){
+          let video = document.querySelector("#main-video-0");
+        },10000);
+      })
+    })()
+</script>
+<script>
+  // 비디오 1
+  (function () {
+    const VIDEO_ID_1 = "webrtc:rtsp2";
 
     async function onSubscribe() {
-        let video = document.querySelector("#main-video-0");
-        video.muted = true;
-        await $video.subscribe(video, VIDEO_ID_0, "primary-camera", false, true, "");
+        let video2 = document.querySelector("#main-video-1");
+        video2.muted = true;
+        await $video.subscribe(video2, VIDEO_ID_1, "primary-camera", false, true, "");
     }
 
     onSubscribe().then(function(){
       setTimeout(function(){
-        let video = document.querySelector("#main-video-0");
+        let video2 = document.querySelector("#main-video-1");
       },10000);
     })
+  })()
 </script>
 <script>
-  const VIDEO_ID_1 = "webrtc:rtsp2";
+  (function () {
+    const VIDEO_ID_2 = "webrtc:rtsp3";
+    console.log(VIDEO_ID_2);
+    async function onSubscribe() {
+        let video3 = document.querySelector("#video");
+        video3.muted = true;
+        await $video.subscribe(video3, VIDEO_ID_2, "primary-camera", false, true, "");
+    }
 
-  async function onSubscribe() {
-      let video2 = document.querySelector("#main-video-1");
-      video2.muted = true;
-      await $video.subscribe(video2, VIDEO_ID_1, "primary-camera", false, true, "");
-  }
-
-  onSubscribe().then(function(){
-    setTimeout(function(){
-      let video2 = document.querySelector("#main-video-1");
-    },10000);
-  })
+    onSubscribe().then(function(){
+      setTimeout(function(){
+        let video3 = document.querySelector("#video");
+      },10000);
+    })
+  }) ()
 </script>
-<script>
-  const VIDEO_ID_2 = "webrtc:rtsp3";
-
-  async function onSubscribe() {
-      let video3 = document.querySelector("#main-video-2");
-      video3.muted = true;
-      await $video.subscribe(video3, VIDEO_ID_2, "primary-camera", false, true, "");
-  }
-
-  onSubscribe().then(function(){
-    setTimeout(function(){
-      let video3 = document.querySelector("#main-video-2");
-    },10000);
-  })
-</script>
-
 
   <script src="./JS/mainScreen.js"></script>
   <script src="./JS/scrollUpDown.js"></script>

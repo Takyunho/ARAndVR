@@ -24,7 +24,7 @@ class Camera {
 
   constructor() {
     this.video = document.getElementById('video');
-	this.video2 = document.getElementById('video2');
+    this.video2 = document.getElementById('video2');
     this.canvas = document.getElementById('output');
     this.ctx = this.canvas.getContext('2d');
   }
@@ -33,10 +33,12 @@ class Camera {
    * Initiate a Camera instance and wait for the camera stream to be ready.
    */
   static async setupCamera() {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      throw new Error(
-        'Browser API navigator.mediaDevices.getUserMedia not available');
-    }
+    console.log(navigator.mediaDevices);
+    // console.log(navigator);
+    //- 카메라를 쓰지 않을때 if문을 열어놓으면 에러에 걸려서 캔버스에 video가 담기지 않음 
+    // if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    //   throw new Error('Browser API navigator.mediaDevices.getUserMedia not available');
+    // }
 
     const $size = { width: 640, height: 480 };
     const $m_size = { width: 360, height: 270 };
@@ -70,6 +72,7 @@ class Camera {
     camera.video.width = videoWidth;
     camera.video.height = videoHeight;
 
+    // canvas
     camera.canvas.width = videoWidth;
     camera.canvas.height = videoHeight;
     const canvasContainer = document.querySelector('.canvas-wrapper');

@@ -73,7 +73,7 @@ class Video {
             pc.createOffer().then(d => {
                 pc.setLocalDescription(d)
 
-                this.RestPost('https://mds.idb.ai:9999/api/publish', {
+                this.RestPost('https://mds.t2v.kr:9999/api/publish', {
                     "token": token,
                     "userId": userId,
                     "channelId": channelId,
@@ -274,7 +274,8 @@ class Video {
 
             pc.createOffer().then(d => {
                 pc.setLocalDescription(d)
-                this.RestPost("https://mds.idb.ai:9999/api/subscribe", {
+                this.RestPost("https://mds.t2v.kr:9999/api/subscribe", {
+                // this.RestPost("https://t2v.o-r.kr/api/subscribe", {
                     "token": token,
                     "userId": userId,
                     "channelId": channelId,
