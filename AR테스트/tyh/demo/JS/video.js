@@ -12,7 +12,7 @@ class Video {
             body: JSON.stringify(body),
         });
         const res = await req.json();
-        console.log(`POST ${url} :`, res);
+        // console.log(`POST ${url} :`, res);
         return res;
     }
 
@@ -30,7 +30,7 @@ class Video {
                     audio: true
                 });
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     }
 
@@ -43,11 +43,11 @@ class Video {
 
             let videoTrack = stream.getVideoTracks()[0];
             let videoSettings = videoTrack.getSettings();
-            console.log("video settings:", videoSettings);
+            // console.log("video settings:", videoSettings);
 
             let audioTrack = stream.getAudioTracks()[0];
             let audioSettings = audioTrack.getSettings();
-            console.log("audio settings:", audioSettings);
+            // console.log("audio settings:", audioSettings);
 
             let pc = new RTCPeerConnection({
                 iceServers: [
@@ -58,7 +58,7 @@ class Video {
             })
 
             let eventCallback = (v) => {
-                console.log("eventCallback: ", v);
+                // console.log("eventCallback: ", v);
                 if (v.state == "disconnected" || v.state == "failed") {
                     setTimeout(() => {
                         pc.close();
@@ -89,7 +89,7 @@ class Video {
                     },
                     "mediaDesc": d
                 }).then(answer => {
-                    console.log("join answer: ", answer)
+                    // console.log("join answer: ", answer)
                     if (answer.error && answer.error.length > 0) {
                         pc.close();
                         setTimeout(() => {
@@ -105,12 +105,12 @@ class Video {
                     }
 
                     pc.setRemoteDescription(new RTCSessionDescription(answer.answer))
-                    console.log(`${channelId} published!`);
+                    // console.log(`${channelId} published!`);
                     resolve(peer);
                     return;
                 }).catch(e => {
                     pc.close();                    
-                    console.log(e);
+                    // console.log(e);
                     setTimeout(() => {
                         eventCallback({
                             state: "failed",
@@ -125,13 +125,13 @@ class Video {
 
             }).catch((e) => {
                 pc.close();
-                console.log(e);
+                // console.log(e);
                 reject(e);
                 return;
             })
 
             pc.oniceconnectionstatechange = () => {
-                console.log(pc.iceConnectionState)
+                // console.log(pc.iceConnectionState)
                 eventCallback({
                     state: pc.iceConnectionState,
                     stream,
@@ -141,7 +141,7 @@ class Video {
             }
             pc.onicecandidate = event => {
                 if (event.candidate === null) {
-                    console.log(event)
+                    // console.log(event)
                 }
             }
 
@@ -186,7 +186,7 @@ class Video {
             }
 
             let onVideoError = (e) => {
-                console.log("video-error: ", e);
+                // console.log("video-error: ", e);
                 reconnect();
             }
 
@@ -194,7 +194,7 @@ class Video {
                 let now = (new Date()).getTime();
                 let expectedTime = (now - startedTime) / 1000;
                 if (pc.connectionState == 'disconnected' || pc.connectionState == 'failed' || pc.connectionState == 'closed' || expectedTime - video.currentTime > 3) {
-                    console.log("needed to reconnect");
+                    // console.log("needed to reconnect");
                     reconnect();
                 } else {
                     setTimeout(watchDog, 1000);
@@ -202,7 +202,7 @@ class Video {
             }
 
             let eventCallback = (v) => {
-                console.log("subscribe eventCallback: ", v);
+                // console.log("subscribe eventCallback: ", v);
                 if (v.state == "disconnected" || v.state == "failed" || v.state == "notfound") {
                     reconnect();
                 }
@@ -219,7 +219,7 @@ class Video {
             }
 
             pc.ontrack = (event) => {
-                console.log("event.track.kind", event.track.kind);
+                // console.log("event.track.kind", event.track.kind);
 
                 if (event.track.kind == "video") {
                     peer.videoStream = event.streams[0];
@@ -252,7 +252,7 @@ class Video {
             }
 
             pc.oniceconnectionstatechange = () => {
-                console.log(pc.iceConnectionState)
+                // console.log(pc.iceConnectionState)
                 eventCallback({
                     state: pc.iceConnectionState,
                     userId, 
@@ -319,7 +319,7 @@ class Video {
 
             }).catch((e) => {
                 pc.close();
-                console.log(e);
+                // console.log(e);
                 reject(e);
                 return;
             });
