@@ -4,7 +4,6 @@
 
 <head>
   <!--# a-frame -->
-  <!-- <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script> -->
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <!--# a-frame htmlembed -->
   <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
@@ -34,6 +33,7 @@
   <!-- <link rel="stylesheet" href="./three2.css"> -->
   <!--# canvas -->
   <script src="https://cdn.rawgit.com/maxkrieger/aframe-draw-component/5a5d1e66/dist/aframe-draw-component.min.js"></script>
+
 
 </head>
 
@@ -79,16 +79,19 @@
 
 
   <!-- 장면에다가 fog="type: linear; color: #222; 를 주면 배경이 가려짐 -->
-  <a-scene far: 30; webxr="requiredFeatures: hit-test,local-floor; optionalFeatures: dom-overlay,unbounded; overlayElement: #overlay;" >
-    <a-light id="dirlight" intensity="1" light="castShadow:true; type:ambient" color="#e3d3c6" position="40 6 1"></a-light>
+  <a-scene far: 30; webxr="requiredFeatures: hit-test,local-floor; optionalFeatures: dom-overlay,unbounded; overlayElement: #overlay;"
+  raycaster="far: 100; objects: [link];" cursor="rayOrigin: mouse">
+    <a-light id="dirlight" intensity="0.6" light="type: ambient" color="#e3d3c6" position="-10 20 1"></a-light>
     <!-- <a-light id="dirlight" intensity="1" light="castShadow:true; type:directional" position="0 6 1"></a-light>
     <a-light id="dirlight" intensity="1" light="castShadow:true; type:directional" position="10 3 1"></a-light>
     <a-light id="dirlight" intensity="1" light="castShadow:true; type:directional" position="10 3 1"></a-light> -->
     <!--@ assets -->
     <a-assets timeout="1000">
-      <!-- <img id="floor" src="./images/floor.png"> -->
-      <!-- <img id="sky" src="./images/stars.jpg"  /> -->
-      <!-- <img id="sky" src="./images/mountain.jpg" /> -->
+      <!-- a-link로 맵 이동하기 -->
+      <img id="thumbJapan" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/japan.png">
+      <img id="thumbEgypt" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/egypt.png">
+      <img id="thumbForest" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/forest.png">
+
       <img id="sky" src="./images/industrial_sunset_02_puresky.webp" />
       <img id="floor" src="./images/FloorStreets0100_1_download600.jpg">
       <img id="floor2" src="./images/FloorStreets_1.jpg">
@@ -115,7 +118,7 @@
     <a-entity id="cameraRig">
       <!-- wasd 컨트롤 -->
       <a-entity id="cameraEntity" camera look-controls wasd-controls="acceleration: 800" position="0 1 0"></a-entity>
-      <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen"></a-entity>
+      <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen;"></a-entity>
       <a-entity laser-controls raycaster="objects: .screen;"></a-entity>
     </a-entity>
 
@@ -245,14 +248,15 @@
 
     <!-- server gltf -->
     <a-entity gltf-model="#server1" position="-19 -2.5 10" rotation="0 90 0" scale="2 2 2">
-      <!-- <a-entity light="type: ambient; color: #BBB"></a-entity> -->
       <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-15 8 1"></a-entity>
     </a-entity>
     <a-entity gltf-model="#server2" position="-19 -2.1 5" scale="0.02 0.02 0.02"></a-entity>
-    <a-entity gltf-model="#server3" position="-19 -2.1 0" scale="1 1 1">
-      <!-- <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-15 8 2"></a-entity> -->
-    </a-entity>
-    
+    <a-entity gltf-model="#server3" position="-19 -2.1 0" scale="1 1 1"></a-entity>
+    <!-- a-link로 맵이동 -->
+    <a-link href="./link/japan.html" position="5 1 -5" rotation="0 0 0" image="#thumbJapan" title="Japan"></a-link>
+    <a-link href="./link/egypt.html" position="8 1 -5" rotation="0 0 0" image="#thumbEgypt" title="Egypt"></a-link>
+    <a-link href="./link/forest.html" position="11 1 -5" rotation="0 0 0" image="#thumbForest" title="Forest"></a-link>
+
   </a-scene>
   
   <!-- 메인 비디오  -->
