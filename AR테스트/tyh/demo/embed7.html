@@ -238,9 +238,11 @@
 
 
     <!-- - gltf -->
-    <a-gltf-model id="page3" src="#3dModel" scale="1 1 1" position="11 -2.1 -18" rotation="0 0 0" width="7.5" height="3.7"></a-gltf-model>
+    <a-gltf-model id="page3" src="#3dModel" scale="1 1 1" position="11 -2.1 -18" rotation="0 0 0" width="7.5" height="3.7"
+    animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 15000; easing: linear; loop: true"></a-gltf-model>
 
-    <a-entity gltf-model="#factory" position="0 -3 0" scale="0.08 0.08 0.08">
+    <!-- - 팩토리 -->
+    <a-entity restrict-position gltf-model="#factory" position="0 -3 0" scale="0.08 0.08 0.08">
       <!-- 조명 -->
       <a-entity light="type: ambient; color: #BBB"></a-entity>
       <a-entity light="type: directional; color: #FFF; intensity: 0.8" position="-0.5 1 1"></a-entity>
@@ -320,8 +322,6 @@
   <!-- yolo -->
   <!-- <script src="./JS/imgCanvasVideo.js"></script> -->
   <script src="./JS/tensorflow.js">  </script>
-  
-  <!-- <script type="module" src="./threeMain.js"></script> -->
 </body>
 
 
