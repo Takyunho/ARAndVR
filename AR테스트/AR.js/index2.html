@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+
+	<style type="text/css">
+		#HeadText {
+			position: absolute;
+			top: 0px;
+			left: 50%;
+			z-index: 10000;
+		}
+	</style>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js">
+	</script>
+	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/dev/aframe/build/aframe-ar.js"></script>
+	<script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+	<script src='https://cdn.plot.ly/plotly-2.16.1.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+	<style>
+		.modebar {
+			display: none;
+		}
+	</style>
+	<a-scene embedded arjs='sourceType: webcam;'>
+
+		<a-marker preset='hiro'>
+			<!--<a-box id="MyBox" position='0 0.5 0' material='opacity: 0.5;' color="red" ></a-box>-->
+			<a-entity position='0 0.5 0' rotation='-90 0 0' htmlembed>
+				<div id='myDiv'></div>
+			</a-entity>
+		</a-marker>
+
+		<a-camera-static />
+	</a-scene>
+
+</body>
+
+<script>
+	d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv", function (err, rows) {
+
+		function unpack(rows, key) {
+			return rows.map(function (row) { return row[key]; });
+		}
+
+
+		var trace1 = {
+			type: "scatter",
+			mode: "lines",
+			name: 'AAPL High',
+			x: unpack(rows, 'Date'),
+			y: unpack(rows, 'AAPL.High'),
+			line: { color: '#17BECF' }
+		}
+
+		var trace2 = {
+			type: "scatter",
+			mode: "lines",
+			name: 'AAPL Low',
+			x: unpack(rows, 'Date'),
+			y: unpack(rows, 'AAPL.Low'),
+			line: { color: '#7F7F7F' }
+		}
+
+		var data = [trace1, trace2];
+
+		var layout = {
+			title: false,
+			autosize: false,
+			width: 500,
+			height: 255,
+			margin: {
+				l: 50,
+				r: 20,
+				b: 150,
+				t: 30,
+				pad: 10
+			},
+			paper_bgcolor: '#7f7f7f',
+			plot_bgcolor: '#c7c7c7'
+		};
+
+		Plotly.newPlot('myDiv', data, layout);
+	})
+
+</script>
+
+</html>
+
+</head>
+
+<body>

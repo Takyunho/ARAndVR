@@ -1,0 +1,192 @@
+<!--! 우측에 메뉴 추가 -->
+<!doctype html>
+<html>
+
+<head>
+  <!--# a-frame -->
+  <!-- <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script> -->
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+
+  <!--# a-frame htmlembed -->
+  <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+  <!--# video.js -->
+  <script src="https://unpkg.com/video.js/dist/video.js"></script>
+  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+  <script src="//cdn.dashjs.org/latest/dash.all.debug.js"></script>
+  <script src="https://unpkg.com/videojs-contrib-dash/dist/videojs-dash.js"></script>
+
+  <!--# material icon -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <!--# css -->
+  <link rel="stylesheet" href="./css/embed5.css">
+</head>
+
+<body id="body">
+
+  <!-- video.js -->
+  <div class="video-container">
+    <video class="video-js" id="ex-video" width=480 height=270 class="vjs-default-skin" controls>
+      <source src="https://ar.idb.ai:8443/rtsp/cam1/index.m3u8">
+    </video>
+  </div>
+
+  <div class="video-container">
+    <video class="video-js" id="ex-video2" width=480 height=270 class="vjs-default-skin" controls>
+      <!-- <source src="./video/sintel.mp4"> -->
+      <!-- <source src="https://ar.idb.ai:8443/rtsp/cam1/index.m3u8"> -->
+      <!-- <source src="./video/202301231237.ts"> -->
+      <source src="./video/KakaoTalk_Video_2023-01-25-09-51-57.mp4">
+    </video>
+  </div>
+
+  <a-scene fog="type: linear; color: #222; far: 20;">
+    <a-assets timeout="1000">
+      <img id="floor" src="./assets/floor.png">
+      <img id="sky" src="./images/stars.jpg" crossorigin="anonymous" />
+      <!-- <video id="video" loop="true" src="./video/sintel.mp4" autoplay></video> -->
+    </a-assets>
+
+    <!--@ 배경 -->
+    <a-plane material="src:#floor; repeat: 700 700; transparent: true;" height="800" width="800" rotation="-90 0 0"
+      position="0 -2 0"></a-plane>
+    <a-sky src="#sky"></a-sky>
+
+    <!--@ 카메라 및 레이캐스터 -->
+    <a-entity id="cameraRig">
+      <a-camera id="camera"></a-camera>
+      <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen"></a-entity>
+      <a-entity laser-controls raycaster="objects: .screen;"></a-entity>
+    </a-entity>
+
+
+
+    <!--^ 첫번째 스크린 (메뉴가 달려있는 스크린) -->
+    <a-entity id="menu" class="screen menu dark" htmlembed="ppu:256" position="-4.712 1.6 -4.476" rotation="0 45 0">
+      <h2>Menu</h2>
+      <ul>
+        <li><a class="btn" id="menu-btn-1">Live Streaming</a></li>
+        <li><a class="btn" id="menu-btn-2">mp4</a></li>
+        <li><a class="btn" id="menu-btn-3">3D Model</a></li>
+        <li><a class="btn" id="menu-btn-4">AR</a></li>
+        <li><a class="btn" id="menu-btn-5">5번째</a></li>
+      </ul>
+    </a-entity>
+
+
+
+    <!--^ 메인스크린 -->
+    <a-entity id="main" class="screen dark main" htmlembed="ppu:256" position="0 1.6 -5">
+      <!--@ 1번 페이지  -->
+      <div id="page1">
+        <h1>Video</h1>
+        <!-- * 재생/멈추기 -->
+        <button class="play-pause-btn-1 btn play-pause-btn" id="playPauseBtn">
+          <span class="material-icons" id="playPause1">play_arrow</span>
+        </button>
+        <!-- * 소리 on/off -->
+        <button class="muted-btn-1 btn muted-btn" id="mutedBtn">
+          <span class="material-icons" id="musicOnOff1">volume_up</span>
+        </button>
+        <!-- * 다음 페이지 -->
+        <a class="btn next" id="menu-btn-2">Next Page</a>
+      </div>
+
+      <!--@ 2번 페이지 -->
+      <div id="page2">
+        <h1>두번째 탭!!!</h1>
+        <button class="play-pause-btn-2 btn play-pause-btn" id="playPauseBtn">
+          <span class="material-icons" id="playPause2">play_arrow</span>
+        </button>
+        <button class="muted-btn-2 btn muted-btn" id="mutedBtn">
+          <span class="material-icons" id="musicOnOff2">volume_up</span>
+        </button>
+        <a class="btn prev" id="menu-btn-1">Prev Page</a>
+        <a class="btn next" id="menu-btn-3">Next Page</a>
+      </div>
+
+      <!--@ 3번 페이지 -->
+      <div id="page3">
+        <h1>three.js</h1>
+        <section id="section"></section>
+        <a class="btn prev" id="menu-btn-2">Prev Page</a>
+        <a class="btn next" id="menu-btn-4">Next Page</a>
+      </div>
+
+      <!--@ 4번 페이지 -->
+      <div id="page4">
+        <h1>4번째 탭~</h1>
+        <a class="btn prev" id="menu-btn-3">Prev Page</a>
+        <a class="btn next" id="menu-btn-5">Next Page</a>
+      </div>
+
+      <!--@ 5번 페이지 -->
+      <div id="page5">
+        <h1>5번째 탭~</h1>
+        <a class="btn prev" id="menu-btn-4">Prev Page</a>
+        <!-- <a class="btn next" id="menu-btn-6">Next Page</a> -->
+      </div>
+
+
+      <!--! a-frame 태그를 숨기기 위해서는 visible 속성을 이용 -->
+      <a-video id="a-video" src="#ex-video_html5_api" position="0 0 0.001" rotation="0 0 0" width="7.5"
+        height="3.7"></a-video>
+      <!-- 두번째 비디오요 -->
+      <a-video id="a-video2" src="#ex-video2_html5_api" position="0 0 0.001" rotation="0 0 0" width="7.5" height="3.7"
+        visible="false"></a-video>
+
+    </a-entity>
+
+
+    <!-- ^ 세번째 화면 -->
+    <a-entity id="menu" class="screen menu dark" htmlembed="ppu:256" position="4.712 1.5 -3.826" rotation="0 -45 0" style="width: 600px;">
+      <div class="tab-content model-file-content">
+        <table id="modelFile" class="file-list">
+          <colgroup>
+            <col style="width: 100%">
+          </colgroup>
+          <thead class="thead">
+            <tr>
+              <th>File Name</th>
+            </tr>
+          </thead>
+          <tbody id="tbody" class="tbody">
+            <!-- td 바인딩 -->
+          </tbody>
+        </table>
+      </div>
+    </a-entity>
+
+
+    <!-- ^ 네번째 화면 -->
+    <a-entity id="menu videoMenu" class="screen menu dark" htmlembed="ppu:256" position="5.412 1.6 -0.876" rotation="0 -90 0">
+      <h2>Links</h2>
+      <a class="imgLink" href="https://aframe.io/">
+        <img src="assets/aframe.png" width="80" height="80">
+        <div>A-Frame</div>
+      </a>
+      <a class="imgLink" href="https://github.com/supereggbert/aframe-htmlembed-component">
+        <img src="assets/github.png" width="80" height="80">
+        <div>Github</div>
+      </a>
+      <a class="imgLink" href="https://www.npmjs.com/package/aframe-htmlembed-component">
+        <img src="assets/npm.png" width="80" height="80">
+        <div>npm</div>
+      </a>
+    </a-entity>
+
+    <!--! 화면(Scene, 장면) 위에 띄우기 -->
+    <!-- <a-video src="#ex-video_html5_api" position="3 3 -5" rotation="0 0 0" width="4.8" height="2.7"></a-video> -->
+    <!-- <a-box material="src:#tex1" scale="0.5 0.5 0.5" position="0 0.5 -4" id="box" visible="false"></a-box> -->
+  </a-scene>
+
+
+  <script src="./JS/main.js"></script>
+  <script src="./JS/fileList.js"></script>
+
+</body>
+
+
+</html>
