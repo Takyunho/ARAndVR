@@ -39,7 +39,7 @@ mixin 속성은 a-assets 태그에 배치되고, id로 설정되어야 하며, �
 3. a-entity에서 mixin="id" 이런식으로 사용
 
 
-! 비디오.js 
+! video.js 
 옵션 참고사이트 : https://videojs.com/guides/setup/#options 
 Player Methods :  https://docs.videojs.com/docs/api/player.html
 
@@ -61,3 +61,15 @@ a-video, a-plane 등등
 
 - htmlembed는 a-frame의 높은 버전에서 아직 지원을 하지 않는 것으로 보임 (1.3 등)
 
+
+! scene
+장면(scene)에다가 fog="type: linear; color: #222; 를 주면 배경이 가려짐
+
+
+
+! yolo + video
+video, canvas, video2 에서 video2까지 display: none을 걸면 a-video에서 동작하지 않음
+
+
+! a-video
+a-frame 태그(video)를 숨기기 위해서는 visible 속성을 이용
