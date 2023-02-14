@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <!-- from https://github.com/aframevr/aframe/ -->
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
+    <script src="https://unpkg.com/aframe-gradient-sky@1.0.4/dist/gradientsky.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-entity id="rain"
+        particle-system="preset: snow;
+        color: #04ff00;
+        particleCount: 1000;
+        maxParticleCount: 10000;
+        size: 3; 
+        direction: 2; 
+        velocityValue: 5 0 0; 
+        accelerationValue: 10 0 0; 
+        maxAge: 3;
+        blending: 2;
+        "
+        width="300" height="300"
+        ></a-entity>
+
+        <!-- <a-entity id="sphere" geometry="primitive: sphere" material="color: #EFEFEF; shader: flat" position="0 0.15 -5"
+            light="type: point; intensity: 5"
+            animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 -0.10 -5; loop: true">
+        </a-entity> -->
+
+            <!--idea 바다를 히트맵처럼 구현할 수 있지 않을까? -->
+            <!-- -> 맞춰서 움직이지 않음 -->
+        <a-entity id="ocean" ocean="density: 2; width: 5; depth: 5; speed: 1"
+            material="color: #04ff00; opacity: 0.5; metalness: 0; roughness: 0" rotation="-90 0 0">
+        </a-entity>
+
+        <a-entity id="ocean" ocean="density: 1; width: 5; depth: 5; speed: 1"
+            material="color: blue; opacity: 0.5; metalness: 0; roughness: 1" position="5 0 0" rotation="-90 0 0">
+        </a-entity>
+
+        <a-entity id="sky" geometry="primitive: sphere; radius: 5000"
+            material="shader: gradient; topColor: 235 235 245; bottomColor: 185 185 210" scale="-1 1 1">
+        </a-entity>
+
+        <a-entity id="light" light="type: ambient; color: #888"></a-entity>
+    </a-scene>
+</body>
+
+</html>
