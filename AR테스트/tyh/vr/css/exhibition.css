@@ -1,0 +1,148 @@
+body {
+  font-family: "Roboto", sans-serif;
+  text-shadow: 0px 0px 10px #00d2ff;
+  color: #fff;
+  font-size: 40px;
+}
+.material-icons {
+  font-size: 40px;
+}
+h1 {
+  font-size: 52px;
+}
+
+/*! 버튼 공용 스타일 */
+a.btn, .btn {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 48px;
+  margin-top: 20px;
+}
+
+/** 다음, 이전버튼 */
+.next, .prev {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  width: auto !important;
+  padding: 20px 30px !important;
+}
+.prev {
+  right: auto;
+  left: 30px;
+}
+/** 재생, 멈추기 버튼 */
+.play-pause-btn, .muted-btn {
+  position: absolute;
+  bottom: 0;
+  left: 800px;
+  width: auto !important;
+  padding: 20px 30px !important;
+}
+
+.muted-btn {
+  left: 920px;
+}
+
+.btn:hover, a.btn:hover, .play-pause-btn:hover, .scrollUp:hover, .scrollDown:hover {
+  background-color: #fff;
+  color: #888;
+}
+.btn:active, a.btn:active, .play-pause-btn:active, .scrollUp:active, .scrollDown:active {
+  background-color: #fff;
+  color: #888;
+  box-shadow: 0px 0px 50px #00d2ff;
+}
+.play-pause-btn:hover {
+  color: #333;
+}
+.play-pause-btn:active {
+  color: #000;
+}
+
+/*! 박스 전체적인 스타일 */
+.dark {
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 100%;
+  padding: 0;
+}
+/* 양옆 박스 */
+.move {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: aliceblue;
+  text-align: center;
+  position: relative;
+}
+
+/* 옆 박스의 메뉴 스타일 */
+.move ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+a.moveLink {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 100%;
+  color: #fff;
+  text-decoration: none;
+  padding: 0;
+  background-color: #444;
+  border: none;
+  text-shadow: none;
+  display: block;
+  transition: all .5s;
+}
+
+a.moveLink:hover {
+  background-color: #00d2ff;
+}
+
+
+
+
+.page1, #sub-page-0 {
+  position: relative;
+  height: 100%;
+}
+
+.page2,
+.page3,
+.page4,
+.page5,
+#sub-page-1 {
+  display: none;
+  position: relative;
+  height: 100%;
+}
+
+.slide {
+    height: 100%;
+}
+
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+
+
