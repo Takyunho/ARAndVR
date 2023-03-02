@@ -1,2 +1,2 @@
-# AR_Study
-ar 예제 및 ar 테스트 파일들
+# AR and VR
+ar + vr 예제 및 ar + vr 테스트
