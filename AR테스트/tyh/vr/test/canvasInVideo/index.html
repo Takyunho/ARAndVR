@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- # hls.js -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <title>video in canvas</title>
+    <style>
+        body {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .video-container {
+            width: 80%;
+            padding: 0;
+            background-color: royalblue;
+            border-radius: 20px;
+            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .video-wrap {
+            width: 30%;
+            margin: 10px;
+            position: relative;
+        }
+
+        .video {
+            width: 100%;
+            height: 100%;
+            border: 1px solid black;
+            /* margin: 10px; */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .canvas {
+            width: 100%;
+            height: 100%;
+            background-color: darkgray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video-container">
+
+        <div class="video-wrap">
+            <!-- <video id="video" autoplay muted style="width:300; height:200; display:none;"></video> -->
+            <video id="hide-video-1" class="video" autoplay muted></video>
+            <!-- <canvas id="output" style="width:300; height:200; display:none;"></canvas> -->
+            <canvas id="output-1" class="canvas"></canvas>
+            <video id="show-video-1" autoplay muted style="width:0; height:0;"></video> <!--- aframe인 경우 사용 -->
+        </div>
+        <div class="video-wrap">
+            <video id="hide-video-2" class="video" autoplay muted></video>
+            <canvas id="output-2" class="canvas"></canvas>
+            <video id="show-video-2" autoplay muted style="width:0; height:0;"></video>
+        </div>
+        <div class="video-wrap">
+            <video id="hide-video-3" class="video" autoplay muted></video>
+            <canvas id="output-3" class="canvas"></canvas>
+            <video id="show-video-3" autoplay muted style="width:0; height:0;"></video>
+        </div>
+        <div class="video-wrap">
+            <video id="hide-video-4" class="video" autoplay muted></video>
+            <canvas id="output-4" class="canvas"></canvas>
+            <video id="show-video-4" autoplay muted style="width:0; height:0;"></video>
+        </div>
+        <div class="video-wrap">
+            <video id="hide-video-5" class="video" autoplay muted></video>
+            <canvas id="output-5" class="canvas"></canvas>
+            <video id="show-video-5" autoplay muted style="width:0; height:0;"></video>
+        </div>
+        <div class="video-wrap">
+            <video id="hide-video-6" class="video" autoplay muted></video>
+            <canvas id="output-6" class="canvas"></canvas>
+            <video id="show-video-6" autoplay muted style="width:0; height:0;"></video>
+        </div>
+        <div class="video-wrap">
+            <video id="hide-video-7" class="video" autoplay muted></video>
+            <canvas id="output-7" class="canvas"></canvas>
+            <video id="show-video-7" autoplay muted style="width:0; height:0;"></video>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const video = document.getElementById("video");
+        const videoSrc = "http://183.111.79.81:8000/rtsp/cam1/index.m3u8";
+
+        if (video.canPlayType("application/vnd.apple.mpegurl")) {
+            video.src = videoSrc;
+        } else if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+        }
+
+    </script>
+    <script src="video.js"></script>
+    <script>
+        // 비디오
+        (function () {
+            const VIDEO_ID_1 = "webrtc:rtsp2";
+
+            async function onSubscribe() {
+                let video2 = document.querySelector("#main-video-1");
+                video2.muted = true;
+                await $video.subscribe(video2, VIDEO_ID_1, "primary-camera", false, true, "");
+            }
+
+            onSubscribe().then(function () {
+                setTimeout(function () {
+                    let video2 = document.querySelector("#main-video-1");
+                }, 10000);
+            })
+        })()
+    </script>
+</body>
+
+</html>
