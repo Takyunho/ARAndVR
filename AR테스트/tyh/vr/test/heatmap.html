@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-heatmap3d/dist/aframe-heatmap3d.min.js"></script> -->
+    <script src="../src/vendor/aframe-heatmap3d.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-box position="0 0 -5" scale="10 10 0">
+        <a-entity heatmap="data: [[0,0,1]]; colors: #00FF00,#FFFF00,#FF0000"></a-entity>
+      </a-box>
+    </a-scene>
+  </body>
+</html>
