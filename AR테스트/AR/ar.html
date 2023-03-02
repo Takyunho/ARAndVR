@@ -223,7 +223,6 @@
 
 
     };
-
 </script>
 
 
@@ -410,112 +409,112 @@
     }
 
 
-    // 탭 3
-    DrawThresholdChart()
-    function DrawThresholdChart() {
-        var message;
-        var curDate = new Date();
-        var bfDate = curDate.setHours(curDate.getHours() - 1);
-        curDate = moment(curDate).format("YYYY-MM-DD HH:mm:ss");
-        bfDate = moment(bfDate).format("YYYY-MM-DD HH:mm:ss");
-        const SENSOR = "co2";
+    // // 탭 3
+    // DrawThresholdChart()
+    // function DrawThresholdChart() {
+    //     var message;
+    //     var curDate = new Date();
+    //     var bfDate = curDate.setHours(curDate.getHours() - 1);
+    //     curDate = moment(curDate).format("YYYY-MM-DD HH:mm:ss");
+    //     bfDate = moment(bfDate).format("YYYY-MM-DD HH:mm:ss");
+    //     const SENSOR = "co2";
 
-        let x1 = [];
-        let y1 = [];
-        let _color;
-        let defaultColor;
-        let upperLimit = 10;
+    //     let x1 = [];
+    //     let y1 = [];
+    //     let _color;
+    //     let defaultColor;
+    //     let upperLimit = 10;
 
-        // https
-        let cmd = "https://t2v.kr:50010/go_idb_ai"
+    //     // https
+    //     let cmd = "https://t2v.kr:50010/go_idb_ai"
 
-        setDefaultColor();
-        drawChart();
-        function drawChart() {
-            upperLimit = setUpperLimit(SENSOR); // co2 = 10
+    //     setDefaultColor();
+    //     drawChart();
+    //     function drawChart() {
+    //         upperLimit = setUpperLimit(SENSOR); // co2 = 10
 
-            fetch(cmd)
-                .then((response) => response.json())
-                .then((parsedResponse) => {
-                    console.log(parsedResponse);
-                    if (parsedResponse.results[0].series[0] != undefined) {
+    //         fetch(cmd)
+    //             .then((response) => response.json())
+    //             .then((parsedResponse) => {
+    //                 console.log(parsedResponse);
+    //                 if (parsedResponse.results[0].series[0] != undefined) {
 
-                        parsedResponse.results[0].series[0].values.forEach(function (item, index) {
-                            var date = new Date(item[0]);
-                            var local_date = moment.utc(date).local().format("YYYY-MM-DD HH:mm:ss");
-                            x1[index] = local_date;
-                            y1[index] = item[1];
-                        });
+    //                     parsedResponse.results[0].series[0].values.forEach(function (item, index) {
+    //                         var date = new Date(item[0]);
+    //                         var local_date = moment.utc(date).local().format("YYYY-MM-DD HH:mm:ss");
+    //                         x1[index] = local_date;
+    //                         y1[index] = item[1];
+    //                     });
 
-                        const firstTrace = {
-                            type: "scatter",
-                            mode: "lines",
-                            name: "Stat",
-                            x: x1,
-                            y: y1,
-                            line: { color: defaultColor },
-                        };
+    //                     const firstTrace = {
+    //                         type: "scatter",
+    //                         mode: "lines",
+    //                         name: "Stat",
+    //                         x: x1,
+    //                         y: y1,
+    //                         line: { color: defaultColor },
+    //                     };
 
-                        const upperLimitLine = {
-                            type: "scatter",
-                            mode: "lines",
-                            name: "Upper_Limit",
-                            x: x1,
-                            y: Array.from({ length: 100 }, () => upperLimit),
-                            line: { color: "red" },
-                        };
+    //                     const upperLimitLine = {
+    //                         type: "scatter",
+    //                         mode: "lines",
+    //                         name: "Upper_Limit",
+    //                         x: x1,
+    //                         y: Array.from({ length: 100 }, () => upperLimit),
+    //                         line: { color: "red" },
+    //                     };
 
-                        const data = [firstTrace, upperLimitLine];
+    //                     const data = [firstTrace, upperLimitLine];
 
-                        const layout = {
-                            title: false,
-                            width: 900,
-                            height: 500,
-                            margin: { t: 15, b: 80, l: 30, r: 20, pad: 0 },
-                            showlegend: false,
-                            // paper_bgcolor: "#f0f0f0",
-                            // plot_bgcolor: "#f0f0f0",
-                            paper_bgcolor: "rgba(0,0,0,0.4)",
-                            plot_bgcolor: "rgba(0,0,0,0.4)",
-                            font: {
-                                //family: 'Jeju Gothic, truetype',
-                                // family: "Nanum Barun Gothic, sans-serif",
-                                size: 24,
-                                // color: "#666666",
-                                color: "#fff",
-                                weight: 700,
-                            },
-                        };
-                        return Plotly.newPlot("myDiv3", data, layout);
-                    } else {
-                        console.log("No Data");
-                    }
-                })
-                .catch((error) => console.log(error));
-        }
-        setInterval(drawChart, 20000);
+    //                     const layout = {
+    //                         title: false,
+    //                         width: 900,
+    //                         height: 500,
+    //                         margin: { t: 15, b: 80, l: 30, r: 20, pad: 0 },
+    //                         showlegend: false,
+    //                         // paper_bgcolor: "#f0f0f0",
+    //                         // plot_bgcolor: "#f0f0f0",
+    //                         paper_bgcolor: "rgba(0,0,0,0.4)",
+    //                         plot_bgcolor: "rgba(0,0,0,0.4)",
+    //                         font: {
+    //                             //family: 'Jeju Gothic, truetype',
+    //                             // family: "Nanum Barun Gothic, sans-serif",
+    //                             size: 24,
+    //                             // color: "#666666",
+    //                             color: "#fff",
+    //                             weight: 700,
+    //                         },
+    //                     };
+    //                     return Plotly.newPlot("myDiv3", data, layout);
+    //                 } else {
+    //                     console.log("No Data");
+    //                 }
+    //             })
+    //             .catch((error) => console.log(error));
+    //     }
+    //     setInterval(drawChart, 20000);
 
 
-        function setUpperLimit() {
-            switch (SENSOR) {
-                case "co2":
-                    return 10;
-                default:
-                    break;
-            }
-        }
+    //     function setUpperLimit() {
+    //         switch (SENSOR) {
+    //             case "co2":
+    //                 return 10;
+    //             default:
+    //                 break;
+    //         }
+    //     }
 
-        function setDefaultColor() {
-            switch (SENSOR) {
-                case "co2":
-                    defaultColor = "#0070C0";
-                    return;
-                default:
-                    break;
-            }
-        }
+    //     function setDefaultColor() {
+    //         switch (SENSOR) {
+    //             case "co2":
+    //                 defaultColor = "#0070C0";
+    //                 return;
+    //             default:
+    //                 break;
+    //         }
+    //     }
 
-    }
+    // }
 
 </script>
 
