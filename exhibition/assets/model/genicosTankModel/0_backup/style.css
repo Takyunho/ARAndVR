@@ -1,0 +1,38 @@
+html, body {
+  height: 100%;
+  /* background-color: #b7ecff; */
+}
+
+body {
+  background-color: #f0f0f0;
+  font-family: Monospace;
+  
+  background: #b7ecff;
+  color: #fff;
+  margin: 0px;
+  overflow: hidden;
+
+  margin: 0;
+}
+
+h3 {
+  font-weight: normal;
+}
+
+#info {
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  display: block;
+}
+
+#info a {
+  color: #75ddc1;
+  font-weight: bold;
+}
+
+
+

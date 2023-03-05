@@ -1,0 +1,44 @@
+<!--- AI 화재 안전 모니터링 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Links • A-Frame">
+    <title>AI 화재 안전 모니터링</title>
+    <!-- - 필수 -->
+    <script src="../src/vendor/aframe-master.js"></script>
+    <!-- - 필수는 아님 -->
+    <script src="../src/vendor/aframe-tooltip-component.js"></script>
+    <script src="../src/vendor/camera-position.js"></script>
+    <script src="../src/vendor/link-controls.js"></script>
+    <!-- - 배경 -->
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+    <!-- <script src="../../js/info-message.js"></script> -->
+  </head>
+  <body>
+    <a-scene
+      fog="color: #241417; near: 0; far: 30;"
+      raycaster="far: 100; objects: [link];"
+      cursor="rayOrigin: mouse"
+      camera-position environment="preset: japan"
+      info-message="htmlSrc: #messageText">
+
+      <a-assets>
+        <img id="thumbExhibition" crossOrigin="anonymous" src="">
+        <img id="thumbEgypt" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/egypt.png">
+        <img id="thumbForest" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/forest.png">
+        <!-- <a-asset-item id="messageText" src="message.html"></a-asset-item> -->
+      </a-assets>
+
+      <!-- => 맵 이동 -->
+      <a-link href="../exhibition.html" position="-3.5 1.5 -1.0" image="#thumbIndex" title="exhibition hall"></a-link>
+
+      <!-- => 조명 -->
+      <a-entity light="type: point; color: #f4f4f4; intensity: 0.4; distance: 0" position="0 2 0"></a-entity>
+
+      <a-entity id="leftHand" link-controls="hand: left"></a-entity>
+      <a-entity id="rightHand" link-controls="hand: right"></a-entity>
+
+    </a-scene>
+  </body>
+</html>
