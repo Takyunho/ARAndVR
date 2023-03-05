@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!-- <script src="js/aframe-master.1.0.4.min.js"></script> -->
+    <script src="../vendor/aframe-environment-component.js"></script>
+    <script src="../vendor/extended-wasd-controls.js"></script>
+    <script src="../vendor/link-controls.js"></script>
+    <script src="../vendor/animation-mixer.js"></script>
+</head>
+
+<body>
+    <a-scene environment="preset: starry; fog: 0;" keyboard-shortcuts="enterVR: false;">
+        <!-- <a-light id="dirlight" intensity="0.1" light="type: ambient" color="#fff" position="0 0 0"></a-light> -->
+
+        <!--=> default camera -->
+        <a-entity id="cameraRig">
+            <a-entity id="cameraEntity" camera look-controls wasd-controls="acceleration: 50" position="0 1.5 0"></a-entity>
+            <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [link];"></a-entity>
+            <a-entity laser-controls raycaster="objects: .screen;"></a-entity>
+        </a-entity>
+
+        <!--=> 자산 -->
+        <a-assets>
+            <img id="thumbIndex" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/index.png">
+            <img id="thumbForest" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/forest.png">
+            <img id="thumbJapan" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/japan.png">
+            <!--- 제니코스 탱크 모델 -->
+            <a-asset-item id="tank" src="../../assets/models/Tank230302/Gen_MixerRoom_15b.gltf"></a-asset-item>
+        </a-assets>
+
+        <!-- => link -->
+        <a-link href="../../embed7.html" position="-13.5 1.5 -1.0" image="#thumbIndex" title="embed"></a-link>
+        <a-link href="forest.html" position="-10 1.5 -1.0" image="#thumbForest" title="kakao map test"></a-link>
+        <a-link href="japan.html" position="-16.5 1.5 -1.0" image="#thumbJapan" title="japan"></a-link>
+
+        <!-- => gltf -->
+        <a-gltf-model id="tankGLTF" src="#tank" scale="0.5 0.5 0.5" position="0 0.2 -5" rotation="0 0 0"></a-gltf-model>
+        
+
+        <!-- => light -->
+        <a-light type="spot" color="#fff" intensity="0.4" angle="180" position="-2 0 2"></a-light>
+        <a-light type="spot" color="#fff" intensity="0.4" angle="180" position="0 0 2"></a-light>
+        <a-light type="spot" color="#fff" intensity="0.4" angle="180" position="2 0 2"></a-light>
+        <a-entity light="type: directional; color: #f4f4f4; intensity: 1; distance: 10;" position="-1 1 0"></a-entity>
+        <a-entity light="type: directional; color: #f4f4f4; intensity: 1; distance: 10;" position="0 1 0"></a-entity>
+        <a-entity light="type: directional; color: #f4f4f4; intensity: 1; distance: 10;" position="1 1 0"></a-entity>
+        <!-- <a-entity light="type: directional; color: #f4f4f4; intensity: 1; distance: 10;" position="0 1 -1"></a-entity>
+        <a-entity light="type: directional; color: #f4f4f4; intensity: 1; distance: 10;" position="1 1 -1"></a-entity> -->
+        <a-entity light="type: point; color: #f4f4f4; intensity: 0.5; distance: 100;" position="0 0 -1"></a-entity>
+        <a-entity light="type: point; color: #f4f4f4; intensity: 0.5; distance: 100;" position="0 0 0"></a-entity>
+        <a-entity light="type: point; color: #f4f4f4; intensity: 0.5; distance: 100;" position="0 0 1"></a-entity>
+        <!-- <a-entity light="type: ambient; color: #BBB; intensity: 0.2;"></a-entity> -->
+
+    </a-scene>
+</body>
+
+</html>
