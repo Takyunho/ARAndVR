@@ -1,0 +1,140 @@
+Why does 'dum1' have a shadow, but 'stand' doesn't have a shadow? Where and how do I fix it?
+    _loadModel() {
+        const RobotArms = new GLTFLoader();
+        let arm1, arm2, arm3, arm4, hand01, hand11L, hand11R, hand12L, hand12R, hand21L, hand21R;
+
+        const arm1Pos = { x: 0, y: 2.93389, z: 0 };
+        const arm2Pos = { x: 0, y: 1.437, z: 0 };
+        const arm3Pos = { x: 0, y: 3.26085, z: 0 };
+        const arm4Pos = { x: 0, y: 3.26276, z: 0 };
+        const hand01Pos = { x: -0.025787, y: 3.2286, z: -0.084646 };
+        const hand11LPos = { x: -0.392473, y: 0.984889, z: 0 };
+        const hand11RPos = { x: 0.392473, y: 0.984889, z: 0 };
+        const hand12LPos = { x: -0.197845, y: 1.59443, z: 0 };
+        const hand12RPos = { x: 0.197845, y: 1.59443, z: 0 };
+        const hand21LPos = { x: -0.262186, y: 1.151901, z: 0 };
+        const hand21RPos = { x: 0.262186, y: 1.151901, z: 0 };
+
+
+        RobotArms.load('./assets/arm1.gltf', (gltf) => {
+            arm1 = new THREE.Object3D();
+            arm1.position.set(arm1Pos.x, arm1Pos.y, arm1Pos.z);
+            arm1.add(gltf.scene);
+            setTimeout(() => {
+                this._scene.add(arm1);
+            }, 800);
+            this.arm1 = arm1;
+            arm1.receiveShadow = true;
+            arm1.castShadow = true;
+        });
+
+
+        RobotArms.load('./assets/arm2.gltf', (gltf) => {
+            arm2 = gltf.scene;
+            arm2.position.set(arm2Pos.x, arm2Pos.y, arm2Pos.z);
+            setTimeout(() => {
+                arm1.add(arm2);
+            }, 800);
+            this.arm2 = arm2;
+        });
+
+        RobotArms.load('./assets/arm3.gltf', (gltf) => {
+            arm3 = gltf.scene;
+            arm3.position.set(arm3Pos.x, arm3Pos.y, arm3Pos.z);
+            setTimeout(() => {
+                arm2.add(arm3);
+            }, 200);
+            this.arm3 = arm3;
+        });
+
+        RobotArms.load('./assets/arm4.gltf', (gltf) => {
+            arm4 = gltf.scene;
+            arm4.position.set(arm4Pos.x, arm4Pos.y, arm4Pos.z);
+            setTimeout(() => {
+                arm3.add(arm4);
+            }, 200);
+            this.arm4 = arm4;
+        });
+
+        RobotArms.load('./assets/hand01.gltf', (gltf) => {
+            hand01 = gltf.scene;
+            hand01.position.set(hand01Pos.x, hand01Pos.y, hand01Pos.z);
+            setTimeout(() => {
+                arm4.add(hand01);
+            }, 800);
+            this.hand01 = hand01;
+        });
+
+        RobotArms.load('./assets/hand11L.gltf', (gltf) => {
+            hand11L = gltf.scene;
+            hand11L.position.set(hand11LPos.x, hand11LPos.y, hand11LPos.z);
+            setTimeout(() => {
+                hand01.add(hand11L);
+            }, 200);
+            this.hand11L = hand11L;
+        });
+
+        RobotArms.load('./assets/hand11R.gltf', (gltf) => {
+            hand11R = gltf.scene;
+            hand11R.position.set(hand11RPos.x, hand11RPos.y, hand11RPos.z);
+            setTimeout(() => {
+                hand01.add(hand11R);
+            }, 200);
+            this.hand11R = hand11R;
+        });
+
+        RobotArms.load('./assets/hand12L.gltf', (gltf) => {
+            hand12L = gltf.scene;
+            hand12L.position.set(hand12LPos.x, hand12LPos.y, hand12LPos.z);
+            setTimeout(() => {
+                hand01.add(hand12L);
+            }, 200);
+            this.hand12L = hand12L;
+        });
+
+        RobotArms.load('./assets/hand12R.gltf', (gltf) => {
+            hand12R = gltf.scene;
+            hand12R.position.set(hand12RPos.x, hand12RPos.y, hand12RPos.z);
+            setTimeout(() => {
+                hand01.add(hand12R);
+            }, 200);
+            this.hand12R = hand12R;
+        });
+
+        RobotArms.load('./assets/hand21L.gltf', (gltf) => {
+            hand21L = gltf.scene;
+            hand21L.position.set(hand21LPos.x, hand21LPos.y, hand21LPos.z);
+            setTimeout(() => {
+                hand11L.add(hand21L);
+            }, 200);
+            this.hand21L = hand21L;
+        });
+
+        RobotArms.load('./assets/hand21R.gltf', (gltf) => {
+            hand21R = gltf.scene;
+            hand21R.position.set(hand21RPos.x, hand21RPos.y, hand21RPos.z);
+            setTimeout(() => {
+                hand11R.add(hand21R);
+            }, 200);
+            this.hand21R = hand21R;
+        });
+
+        ///////stand. not act.
+        RobotArms.load('./assets/stand.gltf', (gltf) => {
+            const stand = gltf.scene;
+            stand.position.set(0, 0, 0);
+            setTimeout(() => {
+                this._scene.add(stand);
+            }, 800);
+            this.stand = stand;
+            stand.castShadow = true;
+        });
+        
+        //test shadow
+        const dum1Geometry = new THREE.BoxGeometry();
+        const dum1 = new THREE.Mesh(dum1Geometry);
+        dum1.position.set(5, 1, 0);
+        this._scene.add(dum1);
+        dum1.castShadow = true;
+
+    }

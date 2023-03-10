@@ -1,0 +1,135 @@
+<!--! embed7.html 참고 -->
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Links • A-Frame">
+    <!--# a-frame -->
+    <!-- <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script> -->
+    <script src="https://aframe.io/releases/0.2.0/aframe.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.14.0/dist/aframe-extras.min.js"></script>
+    <!--# a-frame htmlembed -->
+    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <!-- # extend wasd -->
+    <script src="./src/vendor/extended-wasd-controls.js"></script>
+    <!--# hls.js -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script> -->
+    <!-- <script src="./src/vendor/hls.min.js"></script> -->
+    <!-- <script src="./src/JS/video.js"></script> -->
+    <!--# material icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!--# Google Font(Noto Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,100&display=swap" rel="stylesheet">
+    <!--# moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <!--# css -->
+    <link rel="stylesheet" href="./style/exhibition.css">
+    <!--# canvas -->
+    <script
+        src="https://cdn.rawgit.com/maxkrieger/aframe-draw-component/5a5d1e66/dist/aframe-draw-component.min.js"></script>
+
+</head>
+
+<body id="body">
+
+    <!--=> 장면 -->
+    <a-scene physics id="scene" far: 30; raycaster="far: 100; objects: [link];" cursor="rayOrigin: mouse" loading-screen="dotsColor: white; backgroundColor: black; enabled: true;">
+        <!--=> 조명 -->
+        <a-entity light="type: ambient; color: #fff"></a-entity>
+        <!-- <a-entity light="type: hemisphere; color: #e3d3c6; groundColor: #fff; intensity: 0.8"></a-entity> -->
+        <!-- <a-entity light="type: hemisphere; color: #fff; groundColor: #fff; intensity: 0.5"></a-entity> -->
+        <!-- <a-entity light="type: directional; color: #FFF; intensity: 0.5" position="-0.5 1 1"></a-entity> -->
+        <!-- <a-entity light="type: point; color: #333; intensity: 2" position="-23 3 -3"></a-entity> -->
+        <a-entity light="type: point; color: #333; intensity: 2" position="0 3 -20"></a-entity>
+
+        <!--=> 카메라 및 레이캐스터 -->
+        <a-entity id="cameraRig">
+            <!-- wasd 컨트롤 -->
+            <a-entity id="cameraEntity" camera look-controls wasd-controls="acceleration: 1000; fly: false;" position="0 3 4"></a-entity>
+            <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen;"></a-entity>
+            <a-entity laser-controls raycaster="objects: .screen;"></a-entity>
+        </a-entity>
+
+        <!--=> assets -->
+        <a-assets timeout="1000">
+            <!-- a-link로 맵 이동하기 -->
+            <img id="thumbGoIdbAI" crossOrigin="anonymous" src="./assets/images/goIdbAi.png">
+            <img id="thumbArm" crossOrigin="anonymous" src="./assets/images/Arm.png">
+            <img id="thumbCncMachine" crossOrigin="anonymous" src="./assets/images/CnCMachine.png">
+            <img id="thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/forest.png">
+
+            <!-- 하늘, 바닥 -->
+            <!-- <img id="sky" src="./assets/images/industrial_sunset_02_puresky.webp" /> -->
+            <!-- <img id="floor" src="./assets/images/FloorStreets0100_1_download600.jpg"> -->
+
+            <!-- => 갤러리 -->
+            <!-- <a-asset-item id="gallery" src="./assets/model/files/final.glb"></a-asset-item> -->
+            <a-asset-item id="gallery" src="./assets/model/test.glb"></a-asset-item>
+        </a-assets>
+
+        <!--=> 배경과 바닥 -->
+        <!-- <a-sky src="#sky"></a-sky> -->
+        <!-- <a-plane material="src:#floor; repeat: 100 100; transparent: true;" width="200" height="200" rotation="-90 0 0" position="0 -3 3"></a-plane> -->
+
+
+        <!--^ gltf 모음-->
+        <!-- => 갤러리 -->
+        <a-entity restrict-position gltf-model="#gallery" position="0 -2 -20" scale="3 3 3"
+            rotation="-0.2 -90 0" modify-materials></a-entity>
+
+        <!-- => 바닥 클릭시 위치 이동하기 -->
+        <a-entity id="moveWrap" class="screen move" htmlembed="ppu:256" position="0 -1.9 -10" rotation="-90 0 0">
+            <a class="moveLink" id="move">
+                <div></div>
+            </a>
+        </a-entity>
+        <a-entity id="moveWrap" class="screen move" htmlembed="ppu:256" position="0 -1.9 -20" rotation="-90 0 0">
+            <a class="moveLink" id="move">
+                <div></div>
+            </a>
+        </a-entity>
+
+
+        <!--- link -->
+        <!--=> go.idb.ai -->
+        <a-link backgroundColor="black" href="./view/room1/room1.html" position="-23 3 -5" rotation="0 45 0" image="#thumbGoIdbAI" title="AI fire safety monitoring"></a-link>
+        <!-- => robot arm -->
+        <a-link href="./view/room2/Moving_Arm/index.html" position="-23 3 -20" rotation="0 45 0" image="#thumbArm" title="Robot Arm"></a-link>
+        <!-- => cnc machine -->
+        <a-link href="./view/room3/smic/three.html" position="-23 3 -32" rotation="0 45 0" image="#thumbCncMachine" title="CNC Machine"></a-link>
+        <!-- <a-entity link="href: ./view/room3/smic/three.html; title: My Homepage; image: #thumbForest; backgroundColor: blue;"></a-entity> -->
+
+        <!-- TODO 실시간 환경 모니터링 (히트맵) -->
+        <a-link href="./view/room4/room4.html" position="23 3 -5" rotation="0 -45 0" image="#thumbParticle" title="Room4"
+            backgroundColor="black" borderColor="blue" peekMode="true"></a-link>
+        <!-- => AI 표준 공정 작업 지시 (제니코스) -->
+        <a-link href="./view/room5/room5.html" position="23 3 -20" rotation="0 -45 0" image="#thumbRoom5" title="Genicos Tank"
+            peekMode="true"></a-link>
+        <!-- 현장 오피스 화상회의 -->
+        <!-- <a-link href="./view/room6/room6.html" position="23 3 -32" rotation="0 -45 0" image="#thumbRoom5" title="Room5" peekMode="true"></a-link> -->
+
+    </a-scene>
+
+
+    <script>
+        const move = document.querySelectorAll("#move");
+        console.log(move)
+
+        for (let i = 0; i < move.length; i++) {
+            move[i].addEventListener("click", () => {
+                const cameraEntity = document.getElementById("cameraEntity");
+                cameraEntity.setAttribute("position", `0 3 -${(i + 1) * 10}`);
+                // console.log(cameraEntity);
+                // cameraEntity
+            })
+        }
+    </script>
+
+    <!-- <script src="./src/JS/mainScreen.js"></script> -->
+</body>
+
+</html>

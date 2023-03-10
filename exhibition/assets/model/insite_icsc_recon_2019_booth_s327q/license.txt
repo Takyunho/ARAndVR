@@ -1,0 +1,11 @@
+Model Information:
+* title:	InSite ICSC RECon 2019 Booth S327Q
+* source:	https://sketchfab.com/3d-models/insite-icsc-recon-2019-booth-s327q-34cbe4a1a47445ad8189b9bdb8d3c56f
+* author:	JC (https://sketchfab.com/insiterealestate)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "InSite ICSC RECon 2019 Booth S327Q" (https://sketchfab.com/3d-models/insite-icsc-recon-2019-booth-s327q-34cbe4a1a47445ad8189b9bdb8d3c56f) by JC (https://sketchfab.com/insiterealestate) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

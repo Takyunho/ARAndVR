@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ecommerce Web Store VR WebVR Virtual Reality</title>
+        <meta name="author" content="Donovan Kraeker">
+        <meta name="description" content="Laser pointers in Space. An e-commerce web store you can walk in VR virtual reality headsets made with A-Frame">
+        <script src="https://aframe.io/releases/0.2.0/aframe.js"></script>
+        <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.14.0/dist/aframe-extras.min.js"></script>
+    </head>
+    <body>
+        <a-scene physics>
+            <a-entity camera kinematic-body jump-ability="enableDoubleJump: true; distance: 3;" position="0 2.2 28">
+                <a-entity cursor="fuse: true; maxDistance: 1.5" geometry="primitive: sphere; radius: 1;" position="0 0 -0.69"></a-entity>
+            </a-entity>
+            <!-- Earth -->
+            <a-entity geometry="primitive: sphere; radius: 1810;" position="0 -1780 -1400" rotation="-90 0 0" material="shader: flat; src: url(images/earth-sm.jpg);">
+                <a-animation attribute="rotation" from="0 0 0" to="359 0 0" repeat="indefinite" easing="linear" dur="990000"></a-animation>
+            </a-entity>
+            <!--Welcome Sign-->
+            <a-entity static-body geometry="primitive: plane; height: 5; width: 9" position="0 2.1 20.9" rotation="0 180 0" material="shader: flat; transparent: true; color: #000;"></a-entity>
+            <a-entity static-body geometry="primitive: plane; height: 5; width: 9" position="0 2.1 21" material="shader: flat; side: double; transparent: true; src: url(images/welcome-sign.png)"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth: 1; height: 1.2; width: 4" position="0 -0.9 21" material="shader: standard; metalness: 1.0; color: #3a291f;"></a-entity>
+            <!-- Shop -->
+            <a-entity static-body geometry="primitive: plane; height: 100; width: 200" position="0 -0.5 40" rotation="-90 0 0" material="shader: flat; src: url(images/floor.jpg); repeat: 12 6"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth: 0.5; height: 100; width: 200" position="0 7.7 40" rotation="-90 0 0" material="shader: flat; src: url(images/ceiling.jpg); repeat: 12 6"></a-entity>
+            <!-- Wall Inner -->
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 40" position="-60 3.5 10" rotation="0 90 0" material="shader: flat; src: url(images/wall.jpg); repeat: 2 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 40" position="60 3.5 10" rotation="0 90 0" material="shader: flat; src: url(images/wall.jpg); repeat: 2 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 40" position="45.8 3.5 44.01" rotation="0 45 0" material="shader: flat; src: url(images/wall.jpg); repeat: 2 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 40" position="-45.8 3.5 44.01" rotation="0 -45 0" material="shader: flat; src: url(images/wall.jpg); repeat: 2 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 20" position="-21.7 3.5 58.09" rotation="0 0 0" material="shader: flat; src: url(images/wall.jpg); repeat: 1 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 20" position="21.7 3.5 58.09" rotation="0 0 0" material="shader: flat; src: url(images/wall.jpg); repeat: 1 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 40" position="-86 3.5 80" rotation="0 -44 0" material="shader: flat; src: url(images/wall.jpg); repeat: 2 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 40" position="86 3.5 80" rotation="0 44 0" material="shader: flat; src: url(images/wall.jpg); repeat: 2 1"></a-entity>
+            <!-- Wall Edge -->
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 100" position="100 3.5 40" rotation="0 90 0" material="shader: flat; src: url(images/wall.jpg); repeat: 6 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 100" position="-100 3.5 40" rotation="0 90 0" material="shader: flat; src: url(images/wall.jpg); repeat: 6 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 200" position="0 3.5 90" rotation="0 0 0" material="shader: flat; src: url(images/wall.jpg); repeat: 10 1"></a-entity>
+            <!-- Ship Molding -->
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 200" position="0 15.1 -13" rotation="45 0 0" material="shader: flat; src: url(images/wall.jpg); repeat: 14 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 200" position="0 10 -13" rotation="-45 0 0" material="shader: flat; src: url(images/wall.jpg); repeat: 14 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 200" position="0 -3.2 -13" rotation="45 0 0" material="shader: flat; src: url(images/wall.jpg); repeat: 14 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:0.5; height: 8; width: 200" position="0 -8.3 -13" rotation="-45 0 0" material="shader: flat; src: url(images/wall.jpg); repeat: 14 1"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:200; height: 0.2; width: 0.2" position="0 -5.7 -15.9" rotation="0 90 0" material="shader: flat; color: #0cef37;"></a-entity>
+            <a-entity static-body geometry="primitive: box; depth:200; height: 0.2; width: 0.2" position="0 12.5 -15.9" rotation="0 90 0" material="shader: flat; color: #0cef37;"></a-entity>
+            <!-- Windows -->
+            <a-entity static-body geometry="primitive: plane; height: 8; width: 199.5" position="0 3.5 -10" rotation="0 0 0" material="shader: flat; transparent: true; side: both; src: url(images/windows.png); repeat: 15 1;"></a-entity>
+            <!--Products-->
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="-21 3.5 57.8" rotation="0 180 0" material="src: url(images/5mWgreen-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-21 7 53" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-21 5 53" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="-21 -0.5 53" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="-38.6 3.5 50.8" rotation="0 135 0" material="src: url(images/5mWgreen2in1-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-36 7 47" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-36 5 47" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="-36 -0.5 47" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="-52.6 3.5 36.8" rotation="0 135 0" material="src: url(images/5mWred2in1-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-49 7 34" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-49 5 34" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="-49 -0.5 34" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="-59.7 3.5 20" rotation="0 90 0" material="src: url(images/StylusRed-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-55 7 20" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-55 5 20" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="-55 -0.5 20" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="-59.7 3.5 0" rotation="0 90 0" material="src: url(images/xpresspost-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-55 7 0" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-55 5 0" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="-55 -0.5 0" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="21 3.5 57.8" rotation="0 180 0" material="src: url(images/5mWuv-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="21 7 53" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="21 5 53" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="21 -0.5 53" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="38.6 3.5 50.8" rotation="0 225 0" material="src: url(images/5mWuvStar-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="36 7 47" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="36 5 47" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="36 -0.5 47" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="52.6 3.5 36.8" rotation="0 225 0" material="src: url(images/5mWir-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="49 7 34" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="49 5 34" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="49 -0.5 34" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <!--
+<a-entity geometry="primitive: plane; height: 7.5; width: 16" position="59.7 3.5 0" rotation="0 270 0" material="src: url(images/Discogreen-info.png); shader: flat; side: double; transparent: true"></a-entity>
+<a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="55 8 0" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+<a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="55 6 0" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+<a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="55 0.5 0" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+-->
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="59.7 3.5 20" rotation="0 270 0" material="src: url(images/Projector-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="55 7 20" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="55 5 20" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="55 -0.5 20" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="87.1 3.5 78.5" rotation="0 224 0" material="src: url(images/50mWgreenLine-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="84.5 7 75.7" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="84.5 5 75.7" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="84.5 -0.5 75.7" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="99.74 3.5 56" rotation="0 -90 0" material="shader: flat; src: url(images/300mWir-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="95.5 7 56" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="95.5 5 56" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="95.5 -0.5 56" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="64 3.5 89.7" rotation="0 180 0" material="src: url(images/2Wblue-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="64 7 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="64 5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="64 -0.5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="46 3.5 89.7" rotation="0 180 0" material="src: url(images/150mWred-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="46 7 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="46 5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="46 -0.5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="28 3.5 89.7" rotation="0 180 0" material="src: url(images/300mWuv-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="28 7 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="28 5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="28 -0.5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="10 3.5 89.7" rotation="0 180 0" material="src: url(images/200mWgreen-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="10 7 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="10 5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="10 -0.5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="-8 3.5 89.7" rotation="0 180 0" material="src: url(images/protection-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-8 7 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-8 5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="-8 -0.5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="-26 3.5 89.7" rotation="0 180 0" material="src: url(images/protection-red-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-26 7 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-26 5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="-26 -0.5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="-44 3.5 89.7" rotation="0 180 0" material="src: url(images/diffspot-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-44 7 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-44 5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="-44 -0.5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 7.5; width: 16" position="-62 3.5 89.7" rotation="0 180 0" material="src: url(images/diffcircle-info.png); shader: flat; side: double; transparent: true"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-62 7 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: cylinder; height: 2; radius: 2;" position="-62 5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity static-body geometry="primitive: cylinder; height: 2; radius: 2;" position="-62 -0.5 85" rotation="0 -90 0" material="shader: flat; src: url(images/column2.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="-21 2.3 53" material="src: url(images/5mWgreen.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="-36 2.3 47" rotation="0 -45 0" material="src: url(images/5mWgreen2in1.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="-49 2.3 34" rotation="0 -45 0" material="src: url(images/5mWred2in1.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="-55 2.3 19.9" rotation="0 -90 0" material="src: url(images/StylusRed.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="-55 2.1 -0.03" rotation="0 -90 0" material="src: url(images/fast-ship.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="21 2.3 53" material="src: url(images/5mWuv.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="21 2.3 53" material="src: url(images/5mWuv.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="36 2.3 47" rotation="0 45 0" material="src: url(images/5mWuvStar.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="49 2.3 34" rotation="0 45 0" material="src: url(images/5mWir.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="55 2.4 19.9" rotation="0 90 0" material="src: url(images/Projector.png); side: double; transparent: true;"></a-entity>
+            <!--
+<a-entity geometry="primitive: plane; height: 3; width: 4" position="55 3 -0.03" rotation="0 90 0" material="src: url(images/Discogreen.png); side: double; transparent: true;"></a-entity>
+-->
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="95.5 2.3 56" rotation="0 90 0" material="src: url(images/300mWir.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="84.5 2.3 75.8" rotation="0 45 0" material="src: url(images/50mWgreenLine.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="63.9 2.3 85" material="src: url(images/2Wblue.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="46 2.3 85" material="src: url(images/150mWred.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="28 2.1 85" material="src: url(images/300mWuv.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 3; width: 4" position="9.9 2.3 85" material="src: url(images/200mWgreen.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 2; width: 3.5" position="-8.1 2.3 85" material="src: url(images/protection.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 2; width: 3.5" position="-26.1 2.3 85" material="src: url(images/protection-red.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 1.5; width: 1.5" position="-44 2.3 85" material="src: url(images/diffspot.png); side: double; transparent: true;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 1.5; width: 1.5" position="-62 2.3 85" material="src: url(images/diffcircle.png); side: double; transparent: true;"></a-entity>
+            <!-- Stars -->
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="2 500 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-950 150 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-400 200 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-700 150 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-100 900 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-300 400 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-650 900 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-700 400 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-650 600 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1150 900 -600" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1350 100 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1400 500 -400" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1600 1000 -400" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1500 -300 -400" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1400 200 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1600 1200 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1600 -100 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1200 700 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-500 100 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-800 -200 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-500 -150 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-700 500 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-600 650 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1000 200 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-900 220 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-750 240 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-800 300 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1100 200 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="900 220 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="750 240 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="700 300 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="300 100 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="100 200 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="200 350 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="200 450 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="350 500 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="600 250 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="375 800 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="200 250 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="200 250 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="650 600 -800" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1150 900 -600" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1350 100 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1400 500 -400" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1600 1000 -400" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1300 -300 -400" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1400 200 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1600 1200 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1600 -100 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1200 -200 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1250 -250 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1500 -100 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-1300 -50 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="1200 700 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="500 100 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="800 -200 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="500 -150 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="700 500 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="600 650 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="600 1000 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="750 1200 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="850 1500 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="700 1600 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="200 900 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="100 1400 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="900 1100 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="600 1000 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="100 1400 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-600 1000 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-750 1200 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-850 1500 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-700 1600 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-200 900 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-100 1400 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-900 1100 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-600 1000 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-100 1400 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-600 1000 -300" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-50 500 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="50 1000 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="200 1300 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="750 1400 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="850 1500 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-500 1200 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="300 1400 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="900 1300 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-100 1500 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-700 1200 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-200 50 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-400 30 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-600 -10 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-20 55 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="40 80 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="-500 -80 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="300 130 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="400 70 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="200 20 -500" material="shader: flat; color:#fff"></a-entity>
+            <a-entity geometry="primitive: circle; height: 1; width: 1" position="600 -5 -500" material="shader: flat; color:#fff"></a-entity>
+            <!--Crates-->
+            <a-entity geometry="primitive: plane; height: 0.5; width: 42" position="-78.5 1.7 32.5" rotation="0 0 0" material="shader: flat; transparent: true; side: double; src: url(images/no-access.png)"></a-entity>
+            <a-entity geometry="primitive: box; depth: 2; height: 2; width: 2" position="-95 0.5 20" rotation="-90 0 0" material="shader: standard; src: url(images/crate.png)"></a-entity>
+            <a-entity geometry="primitive: box; depth: 2; height: 2; width: 2" position="-92 0.5 22" rotation="-90 25 0" material="shader: standard; src: url(images/crate.png)"></a-entity>
+            <a-entity geometry="primitive: box; depth: 2; height: 2; width: 2" position="-90 0.5 21" rotation="-90 115 0" material="shader: standard; src: url(images/crate.png)"></a-entity>
+            <a-entity geometry="primitive: box; depth: 2; height: 2; width: 2" position="-91 2.5 21" rotation="-90 -45 0" material="shader: standard; src: url(images/crate.png)"></a-entity>
+            <a-entity geometry="primitive: box; depth: 2; height: 2; width: 2" position="-94 0.5 17" rotation="-90 25 0" material="shader: standard; src: url(images/crate.png)"></a-entity>
+            <a-entity geometry="primitive: box; depth: 2; height: 2; width: 2" position="-94 0.5 10" rotation="-90 65 0" material="shader: standard; src: url(images/crate.png)"></a-entity>
+            <!-- Portal -->
+            <a-entity geometry="primitive: torus; height: 1; radius: 3;" position="80 2.5 10" theta-length="180" rotation="0 0 0" material="shader: standard; src: url(images/ceiling.jpg)"></a-entity>
+            <!-- Rest of Portal -->
+            <a-entity geometry="primitive: plane; height: 5.4; width: 5.4" position="80 2.6 10" rotation="0 0 0" material="shader: flat; transparent: true; side: double; src: url(images/portal.png)">
+                <a-animation attribute="rotation" from="0 0 0" to="0 0 359" repeat="indefinite" easing="linear" dur="12000"></a-animation>
+            </a-entity>
+            <a-entity geometry="primitive: box; depth: 1; height: 2; width: 2.5;" position="80 -0.5 10" rotation="0 0 0" material="shader: standard; src: url(images/column.jpg)"></a-entity>
+            <a-entity geometry="primitive: plane; height: 1; width: 1" position="48 7.1 55" rotation="0 -45 0" material="shader: flat; transparent: true; side: double; src: url(images/exit.png)"></a-entity>
+            <!-- Lighting and Background -->
+            <a-sky color="#000"></a-sky>
+        </a-scene>
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }
+                ,
+                i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            }
+            )(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-56782327-24', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </body>
+</html>

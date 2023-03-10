@@ -1,0 +1,39 @@
+<!-- room2 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> Roboy Arm </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="basic.css">
+    <script type="module" src="script-base.js" defer></script>
+
+    <script src="video_broadcasting.js"></script>
+    <script src="./hls.min.59.js"></script>
+</head>
+<body>
+
+    <div class="contatiner">
+        <a href="../../../exhibition.html" class="back-btn"> Hall로 이동</a>
+    </div>
+    <video id="video"></video>
+    <img class="data-img" src="../../../assets/images/robotArm_data.png" alt="">
+
+    <div id="webgl-container"></div>
+
+
+    <script>
+        const urlSearch = new URLSearchParams(location.search);
+        // const videoId = urlSearch.get('videoId');
+        const videoId = `webrtc:rtsp011`;
+
+        async function onSubscribe() {
+            let video = document.querySelector("#video");
+            video.muted = true;
+            await $video.subscribe(video, videoId, "primary-camera", false, true, "");
+        }
+    
+        onSubscribe();
+    </script>
+</body>
+</html> 

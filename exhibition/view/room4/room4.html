@@ -1,0 +1,333 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Links • A-Frame">
+    <title>data center</title>
+
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="../../src/vendor/aframe-spe-particles-component.js"></script>
+    <script src="../../src/vendor/link-controls.js"></script>
+    <!-- <script src="../../src/vendor/extended-wasd-controls.js"></script> -->
+    <!-- <script src="../../src/vendor/animation-mixer.js"></script> -->
+
+
+    <!-- <script src="https://unpkg.com/aframe-heatmap3d/dist/aframe-heatmap3d.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/aframe-heatmap-component@^1.0.0/dist/aframe-heatmap-component.min.js"></script> -->
+    <script src="../../src/vendor/aframe-heatmap3d.js"></script>
+    <link rel="stylesheet" href="../../style/room4.css">
+</head>
+
+<body>
+
+    <div class="contatiner">
+        <a href="../../exhibition.html" class="back-btn"> Hall로 이동</a>
+    </div>
+
+    <a-scene keyboard-shortcuts="enterVR: false;">
+        <!-- => Light -->
+        <a-entity light="type: ambient; color: #fff"></a-entity>
+        <a-entity light="type: directional; color: #FFF; intensity: 0.8" position="-0.5 1 1"></a-entity>
+        <a-entity light="type: directional; color: #FFF; intensity: 1" position="-0.5 1 1"></a-entity>
+
+        <!--=> default camera -->
+        <a-entity id="cameraRig">
+            <a-entity id="cameraEntity" camera look-controls wasd-controls="acceleration: 30" position="-0.5 1.5 10"></a-entity>
+            <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [link];"></a-entity>
+            <a-entity laser-controls raycaster="objects: .screen;"></a-entity>
+        </a-entity>
+        
+        <!-- => assets -->
+        <a-assets>
+            <img id="thumbExhibition" crossOrigin="anonymous" src="../../assets/images/exhibitionHall.png">
+            <a-asset-item id="room" src="../../assets/model/vr_exhibition_gallery_baked/scene.gltf"></a-asset-item>
+            <a-asset-item id="dataCenter" src="../../assets/model/datacenter.glb"></a-asset-item>
+        </a-assets>
+
+        <!-- => gltf -->
+        <a-gltf-model id="roomGLTF" src="#room" scale="0.6 0.6 0.6" position="-0.6 0 -20" rotation="0 -90 0"></a-gltf-model>
+        <!-- 1열 -->
+        <a-gltf-model id="dataCenterGLTF" src="#dataCenter" scale="0.015 0.015 0.015" position="-3 -1 15" rotation="0 90 0"></a-gltf-model>
+        <a-gltf-model id="dataCenterGLTF" src="#dataCenter" scale="0.015 0.015 0.015" position="-3 -1 22" rotation="0 90 0"></a-gltf-model>
+        <a-gltf-model id="dataCenterGLTF" src="#dataCenter" scale="0.015 0.015 0.015" position="-3 -1 29" rotation="0 90 0"></a-gltf-model>
+        <!-- 2열 -->
+        <a-gltf-model id="dataCenterGLTF" src="#dataCenter" scale="0.015 0.015 0.015" position="4 -1 15" rotation="0 90 0"></a-gltf-model>
+        <a-gltf-model id="dataCenterGLTF" src="#dataCenter" scale="0.015 0.015 0.015" position="4 -1 22" rotation="0 90 0"></a-gltf-model>
+        <a-gltf-model id="dataCenterGLTF" src="#dataCenter" scale="0.015 0.015 0.015" position="4 -1 29" rotation="0 90 0"></a-gltf-model>
+        <!-- 3열 -->
+        <a-gltf-model id="dataCenterGLTF" src="#dataCenter" scale="0.015 0.015 0.015" position="11 -1 15" rotation="0 90 0"></a-gltf-model>
+        <a-gltf-model id="dataCenterGLTF" src="#dataCenter" scale="0.015 0.015 0.015" position="11 -1 22" rotation="0 90 0"></a-gltf-model>
+        <a-gltf-model id="dataCenterGLTF" src="#dataCenter" scale="0.015 0.015 0.015" position="11 -1 29" rotation="0 90 0"></a-gltf-model>
+        
+        <!-- => link -->
+        <a-link href="../../exhibition.html" position="-1 2 15" image="#thumbIndex" title="exhibition hall"></a-link>
+        
+        <!-- => heatmap-->
+        <!-- 1구역 -->
+        <a-entity position="-10.5 0 -10" rotation="0 0 0" spe-particles="
+            texture: ../../assets/images/particles/snowflake.png; 
+            particle-count: 1000; 
+            max-age: 1; 
+            blending: additive;
+            distribution: sphere; 
+            velocity: 0.01;
+            velocity-spread: 0;
+            radius: 0.1;
+            color: #00FF00;
+            opacity: 0.05;
+            opacitySpread: 0.5;
+            " scale="20 3 100">
+        </a-entity>
+        <!-- <a-entity position="-10.5 0 0"
+                rotation="0 90 0"
+                spe-particles="texture: ../../assets/images/particles/snowflake.png; 
+                    particle-count: 1000;
+                    blending: additive;
+                    color: #00FF00;
+                    max-age:  10;
+                    velocity: 0.01;
+                    velocity-spread: 1;
+                    position-distribution: box;
+                    size: 20, 20, 20, 3;"
+                    scale="2 2 2">
+        </a-entity> -->
+        <!-- 흰색 차선처럼 보이는 파티클 형태 -->
+        <!-- <a-entity position="-10.5 0 0"
+                rotation="0 90 0"
+                spe-particles="texture: ../../assets/images/particles/snowflake.png; 
+                    particle-count: 10000;
+                    blending: additive;
+                    max-age:  4;
+                    velocity: 0.1;
+                    velocity-spread: 1;
+                    position-distribution: box;
+                    size: 3, 3, 3, 3;
+                    ">
+        </a-entity> -->
+
+
+
+        <!-- <a-entity position="-10.5 0 20" rotation="0 0 0" spe-particles="
+            texture: ../../assets/images/particles/snowflake.png; 
+            color: #FF0000, #ffab00, #FFFF00, #00FF00;
+            particle-count: 100; 
+            max-age: 3; 
+            blending: additive;
+            distribution: sphere; 
+            velocity: 0 0.5 0;
+            velocity-spread: 0.2 0.2 0.2; 
+            radius: 0.1;
+            opacity: 1, 1, 1, 0;
+            opacitySpread: 0.5;
+            size: 3, 3, 3, 0" scale="20 3 100">
+        </a-entity> -->
+
+        
+        <!-- 2구역 -->
+        <a-entity position="-3.5 0 -10" rotation="0 0 0" spe-particles="
+        texture: ../../assets/images/particles/snowflake.png; 
+        particle-count: 1000; 
+        max-age: 3; 
+        blending: additive;
+        distribution: sphere; 
+        velocity: 0.01;
+        velocity-spread: 0;
+        radius: 0.1;
+        color: #880000;
+        opacity: 0.05;
+        opacitySpread: 0.5;
+        size: 3, 3, 3, 0" scale="20 3 100">
+        </a-entity>
+        <!-- 3구역 -->
+        <a-entity position="3.5 0 -10" rotation="0 0 0" spe-particles="
+        texture: ../../assets/images/particles/snowflake.png; 
+        particle-count: 50000; 
+        max-age: 3; 
+        blending: additive;
+        distribution: sphere; 
+        velocity: 0.01;
+        velocity-spread: 0;
+        radius: 0.1;
+        color: #00FF00;
+        opacity: 0.05;
+        opacitySpread: 0.5;
+        size: 3, 3, 3, 0" scale="20 3 100">
+        </a-entity>
+        <!-- 4구역 -->
+        <a-entity position="10.5 0 -10" rotation="0 0 0" spe-particles="
+        texture: ../../assets/images/particles/snowflake.png; 
+        particle-count: 50000; 
+        max-age: 3; 
+        blending: additive;
+        distribution: sphere; 
+        velocity: 0.01;
+        velocity-spread: 0;
+        radius: 0.1;
+        color: #00FF00;
+        opacity: 0.05;
+        opacitySpread: 0.5;
+        size: 3, 3, 3, 0" scale="20 3 100">
+        </a-entity>
+        <!-- 맨 앞 -->
+        <!-- <a-entity position="0 0 3" rotation="0 90 0" spe-particles="
+        texture: ../../assets/images/particles/snowflake.png; 
+        particle-count: 50000; 
+        max-age: 3; 
+        blending: additive;
+        distribution: sphere; 
+        velocity: 0.01;
+        velocity-spread: 0;
+        radius: 0.1;
+        color: #00FF00;
+        opacity: 0.05;
+        opacitySpread: 0.5;
+        size: 3, 3, 3, 0" scale="10 3 89">
+        </a-entity> -->
+        <!-- 맨 뒤 -->
+        <a-entity position="0 0 -21" rotation="0 90 0" spe-particles="
+        texture: ../../assets/images/particles/snowflake.png; 
+        particle-count: 50000; 
+        max-age: 3; 
+        blending: additive;
+        distribution: sphere; 
+        velocity: 0.01;
+        velocity-spread: 0;
+        radius: 0.1;
+        color: #00FF00;
+        opacity: 0.05;
+        opacitySpread: 0.5;
+        size: 3, 3, 3, 0" scale="20 3 100">
+        </a-entity>
+
+        <!-- 천장 -->
+        <!-- <a-entity position="-10.5 7 -8" rotation="0 0 0" spe-particles="
+        texture: ../../assets/images/particles/snowflake.png; 
+        particle-count: 1000000; 
+        max-age: 1; 
+        blending: additive;
+        distribution: sphere; 
+        velocity: 0.01;
+        velocity-spread: 0;
+        radius: 2;
+        color: #00FF00;
+        opacity: 0.07;
+        size: 6, 2, 2, 2" scale="25 1 100">
+        </a-entity> -->
+
+
+
+
+        <!-- <a-entity position="-5.5 0.5 -1.5" rotation="0 00 0" spe-particles="
+        texture: ../../assets/images/particles/snowflake.png; 
+        particle-count: 50000; 
+        max-age: 3; 
+        blending: additive;
+        distribution: sphere; 
+        velocity: 0.01;
+        velocity-spread: 0;
+        radius: 0.1;
+        color: green;
+        opacity: 0.05;
+        size: 2, 3, 3, 2" scale="16 3 70">
+        </a-entity> -->
+        
+
+        <!-- => heatmap -->
+        <!-- <a-box position="-20 0 -5" width="3" height="6" depth="4">
+            <a-entity heatmap="data: [[-20,0,3]]; colors: #00FF00,#FFFF00,#FF0000"></a-entity>
+        </a-box> -->
+
+
+
+        <!-- water fountain -->
+        <!-- <a-cylinder position="-28 2 -4" radius="0.1" height="0.1" color="gray">
+            <a-entity spe-particles="
+            texture: ../../assets/images/particles/snowflake.png; 
+            color: #0000FF, #00FFFF, #FFFFFF; 
+            opacity: 1, 1, 0;
+            size: 1, 1, 0;
+            velocity: 0 4 0; 
+            velocity-spread: 2 0 2; 
+            acceleration: 0 -6 0;
+            particle-count: 1000;">
+            </a-entity>
+        </a-cylinder> -->
+
+        <!-- sparkle-ball -->
+        <!-- <a-sphere radius="0.1" position="-33 2 -4" color="#FF8800">
+        <a-entity spe-particles="
+            texture: ../../assets/images/particles/sparkle.png;
+            color: #FFFF00, #FF0000; 
+            size: 1, 0;
+            distribution: SPHERE;
+            radius: 0.001;
+            velocity: 0.2;
+            velocity-spread: 0.1; 
+            angle: 0, 6.28;
+            particle-count: 1000;
+            blending: additive;
+            maxAge: 3; ">
+        </a-entity>
+        </a-sphere> -->
+
+        <!-- star fountain -->
+        <!-- <a-entity position="-30 2 -4" spe-particles="
+            texture: ../../assets/images/particles/star.png;
+            color: #FF0000, #FFFF00, #00FFFF, #FF00FF;
+            distribution: BOX;
+            opacity: 1,1,1,0;
+            velocity: 0 0.5 0;
+            velocity-spread: 0.2 0 0.2; 
+            blending: normal;
+            particle-count: 100;
+            angle: 0, 6.28;
+            maxAge: 3; ">
+        </a-entity> -->
+
+        <!-- firework -- set active-multiplier to a large number and also set duration < max-age for a single burst -->
+        <!-- <a-entity position="-31 4 -8" spe-particles="
+            texture: ../../assets/images/particles/sparkle.png;
+            color: yellow, red, cyan, black; 
+            distribution: sphere; 
+            randomize-velocity: true;
+            radius: 0.01; 
+            particle-count: 800; 
+            velocity: 1; 
+            velocity-spread: 0.5; 
+            drag: 1; 
+            max-age: 2;
+            blending: additive;
+            active-multiplier: 1000; 
+            size: 1, 1, 1, 0">
+        </a-entity> -->
+
+        <!-- clouds -->
+        <!-- <a-entity position="-32 3.5 -4" spe-particles="
+            texture: ../../assets/images/particles/fog-256.png; 
+            position-spread: 1 0.2 0.5; 
+            velocity-spread: 0.1 0.05 0.1; 
+            particle-count: 200; 
+            max-age: 10; 
+            size: 6, 10; 
+            opacity: 0, 1, 0; 
+            angle: 0;
+            angle-spread: 6.28;
+            randomize-position: true;">
+        </a-entity> -->
+
+        <!-- color ball -->
+        <!-- <a-entity position="-33 2 -4" spe-particles="
+            texture: ../../assets/images/particles/circle.png; 
+            particle-count: 400; 
+            max-age: 3; 
+            distribution: sphere; 
+            radius: 0.2;
+            color: #FF0000, #0000FF; 
+            color-spread: 1 0 0, 0 0 1; 
+            size: 0, 1, 0">
+        </a-entity> -->
+
+    </a-scene>
+</body>
+
+</html>
