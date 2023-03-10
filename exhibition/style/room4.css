@@ -31,3 +31,15 @@ a:visited {
   background-color: #fff;
   color: #333;
 }
+
+
+/*^ video */
+
+.video-container {
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 2px solid #fff;
+  display: none;
+}
