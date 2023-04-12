@@ -43,7 +43,7 @@
             right: 0;
             margin: 0 auto;
             width: 100%;
-            max-width: 320px;
+            max-width: 450px;
             height: 1rem;
             display: flex;
             justify-content: center;
@@ -106,9 +106,9 @@
 
 <body style="margin : 0px; overflow: hidden;">
     <ul class="list">
-        <li id="tab0" class="tab-button click-color">Chart_1</li>
-        <li id="tab1" class="tab-button">Chart_2</li>
-        <li id="tab2" class="tab-button">Chart_3</li>
+        <li id="tab0" class="tab-button click-color">표준 공정 지시</li>
+        <li id="tab1" class="tab-button">작업지시</li>
+        <li id="tab2" class="tab-button">실시간 차트</li>
     </ul>
 
     <a-scene cursor='rayOrigin: mouse; fuse: false' raycaster="objects: #tab0, #tab1" vr-mode-ui="enabled: false"
@@ -129,11 +129,15 @@
             </a-entity>
 
             <a-entity position='0 0 0' rotation='-90 0 0' scale="1 1 1" htmlembed>
-                <div id='myDiv2' class="tab-content none"></div>
+                <div id='myDiv2' class="tab-content none">
+                    
+                </div>
             </a-entity>
 
             <a-entity position='0 0 0' rotation='-90 0 0' scale="1 1 1" htmlembed>
-                <div id='myDiv3' class="tab-content none"></div>
+                <div id='myDiv3' class="tab-content none">
+                    <img src="./robotArm_data.png" alt="">
+                </div>
             </a-entity>
 
 
